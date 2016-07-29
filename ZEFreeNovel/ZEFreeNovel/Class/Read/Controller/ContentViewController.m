@@ -30,7 +30,7 @@
     
     _textView = [[UITextView alloc]init];
     _textView.userInteractionEnabled = false;
-    _textView.selectable = false;
+//    _textView.selectable = false;
     _textView.textContainerInset = UIEdgeInsetsMake(0, 10, 0, 10);
     
     [self.view addSubview:_nameLabel];

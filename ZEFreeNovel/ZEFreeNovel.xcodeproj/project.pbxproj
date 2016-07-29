@@ -30,6 +30,7 @@
 		997FC79A1D46349600B725B9 /* ZEFreeNovelUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7991D46349600B725B9 /* ZEFreeNovelUITests.m */; };
 		997FC7B11D46383300B725B9 /* BookstoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7B01D46383300B725B9 /* BookstoreViewController.m */; };
 		997FC7B41D46384200B725B9 /* StacksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7B31D46384200B725B9 /* StacksViewController.m */; };
+		99908C7A1D4B799300B55879 /* ReadUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C791D4B799300B55879 /* ReadUtils.m */; };
 		99FB9F671D463A3200C9C8AD /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB9F661D463A3200C9C8AD /* TabBarController.m */; };
 		99FB9F6A1D463EB800C9C8AD /* HttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB9F691D463EB800C9C8AD /* HttpUtils.m */; };
 		99FB9F711D4640DB00C9C8AD /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB9F701D4640DB00C9C8AD /* NSString+Extension.m */; };
@@ -103,6 +104,8 @@
 		997FC7B21D46384200B725B9 /* StacksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StacksViewController.h; sourceTree = "<group>"; };
 		997FC7B31D46384200B725B9 /* StacksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StacksViewController.m; sourceTree = "<group>"; };
 		99908C761D4B72AF00B55879 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		99908C781D4B799300B55879 /* ReadUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadUtils.h; sourceTree = "<group>"; };
+		99908C791D4B799300B55879 /* ReadUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadUtils.m; sourceTree = "<group>"; };
 		99FB9F651D463A3200C9C8AD /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		99FB9F661D463A3200C9C8AD /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		99FB9F681D463EB800C9C8AD /* HttpUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpUtils.h; sourceTree = "<group>"; };
@@ -182,6 +185,7 @@
 		992422641D48E46700C14F40 /* Read */ = {
 			isa = PBXGroup;
 			children = (
+				99908C771D4B78D700B55879 /* Tool */,
 				992422771D4B2F7E00C14F40 /* Model */,
 				992422651D48E48900C14F40 /* Controller */,
 			);
@@ -356,6 +360,15 @@
 				99FB9F661D463A3200C9C8AD /* TabBarController.m */,
 			);
 			path = RootController;
+			sourceTree = "<group>";
+		};
+		99908C771D4B78D700B55879 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				99908C781D4B799300B55879 /* ReadUtils.h */,
+				99908C791D4B799300B55879 /* ReadUtils.m */,
+			);
+			path = Tool;
 			sourceTree = "<group>";
 		};
 		E77F7DE307DDE6B348B026BA /* Frameworks */ = {
@@ -552,6 +565,7 @@
 				997FC7791D46349600B725B9 /* AppDelegate.m in Sources */,
 				992422711D48FC6700C14F40 /* ReadBooksModel.m in Sources */,
 				9924224C1D48920100C14F40 /* TypeModel.m in Sources */,
+				99908C7A1D4B799300B55879 /* ReadUtils.m in Sources */,
 				992422601D48B92B00C14F40 /* BooksModel.m in Sources */,
 				997FC7B41D46384200B725B9 /* StacksViewController.m in Sources */,
 				992422741D49091000C14F40 /* ChapterContent.m in Sources */,
