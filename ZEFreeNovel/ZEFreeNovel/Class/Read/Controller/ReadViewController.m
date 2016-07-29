@@ -344,7 +344,7 @@ typedef NS_ENUM(NSUInteger, ZEViewAppear) {
     return _cacheChapter;
 }
 
-- (NSMutableArray *)LastPageRange {
+- (NSMutableArray *)PageRange {
     if (_PageRange == nil) {
         _PageRange = [NSMutableArray array];
     }
