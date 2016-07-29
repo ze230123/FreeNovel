@@ -7,7 +7,6 @@
 //
 
 #import "BooksListCell.h"
-#import <Masonry.h>
 
 @interface BooksListCell ()
 /** 图片 */

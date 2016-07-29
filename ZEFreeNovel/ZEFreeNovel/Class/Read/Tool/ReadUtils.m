@@ -7,7 +7,7 @@
 //
 
 #import "ReadUtils.h"
-#import "ContentViewController.h"
+#import "PageRangeModel.h"
 
 @interface ReadUtils ()
 

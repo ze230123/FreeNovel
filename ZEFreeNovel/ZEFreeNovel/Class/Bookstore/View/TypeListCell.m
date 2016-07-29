@@ -8,8 +8,6 @@
 
 #import "TypeListCell.h"
 
-#import <Masonry.h>
-
 @interface TypeListCell ()
 
 @property (nonatomic, strong) UILabel *typeName;

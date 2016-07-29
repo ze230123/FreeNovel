@@ -14,7 +14,6 @@
 
 #import "BooksListCell.h"
 
-#import "NSString+Extension.h"
 
 @interface BooksListViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 /** 书籍列表模型 */

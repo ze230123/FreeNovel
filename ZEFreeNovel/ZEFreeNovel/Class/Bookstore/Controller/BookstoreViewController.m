@@ -11,13 +11,9 @@
 
 #import "BookstoreViewController.h"
 #import "BooksListViewController.h"
-#import "HttpUtils.h"
 #import "TypeList.h"
 #import "TypeModel.h"
 #import "TypeListCell.h"
-
-#import <MJExtension.h>
-#import <Masonry.h>
 
 @interface BookstoreViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 

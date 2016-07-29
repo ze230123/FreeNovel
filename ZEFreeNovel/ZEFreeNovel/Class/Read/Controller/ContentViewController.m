@@ -5,10 +5,8 @@
 //  Created by 泽i on 16/7/27.
 //  Copyright © 2016年 泽i. All rights reserved.
 //
-#define kRandomColor ([UIColor colorWithRed:arc4random_uniform(256)/255.0 green:arc4random_uniform(256)/255.0 blue:arc4random_uniform(256)/255.0 alpha:1.0f])
 
 #import "ContentViewController.h"
-#import <Masonry.h>
 
 @interface ContentViewController ()
 

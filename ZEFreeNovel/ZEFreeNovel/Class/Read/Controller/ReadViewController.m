@@ -11,7 +11,6 @@
 #import "ReadBooksModel.h"
 
 #import "ReadUtils.h"
-#import "NSString+Extension.h"
 
 @interface ReadViewController () <UIPageViewControllerDataSource,UIPageViewControllerDelegate>
 
@@ -34,49 +33,6 @@
         
     }
     return self;
-}
-
-/// 获取图书章节目录
-- (void)getBookChapter {
-    [HttpUtils post:BOOK_CHAPTERLIST_URL parameters:@{@"bookId":self.bookId} callBack:^(id data) {
-        NSLog(@"获取章节目录完成");
-        self.bookModel = [ReadBooksModel mj_objectWithKeyValues:data];
-        [self getChapterContent];
-    }];
-}
-/// 获取章节内容 默认为5章
-- (void)getChapterContent {
-    
-    NSMutableArray *cacheList = [NSMutableArray array];
-    for (NSInteger index = self.utils.cacheNumber; index < self.utils.cacheNumber + 5; index++) {
-        BookChapter *chapter = self.bookModel.chapterList[index];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
-            [HttpUtils post:BOOK_CONTENT_URL parameters:@{@"bookId":chapter.bookId,@"cid":chapter.cid} callBack:^(id data) {
-                
-                ChapterContent *content = [ChapterContent mj_objectWithKeyValues:data];
-                content.txt = [content.txt stringByReplacingOccurrencesOfString:@"<br /><br />" withString:@"\n"];
-                [cacheList addObject:content];
-                // 如果数组里的模型数量为 5 对数组里的章节内容按升序排序
-                if (cacheList.count == 5) {
-                    [self.utils sortForcacheChapers:cacheList];
-                    [self setPageViewControllers];
-                    }
-            }];
-        });
-    }
-}
-
-- (void)setPageViewControllers {
-    
-    if (self.pageViewController.viewControllers.count == 0) {
-        NSLog(@"pageviewcontroller 设置数据");
-        ContentViewController *initialViewController = [self viewControllerAtIndex:0 type:After];// 得到第一页
-        [_pageViewController setViewControllers:@[initialViewController]
-                                      direction:UIPageViewControllerNavigationDirectionReverse
-                                       animated:NO
-                                     completion:nil];
-    }
 }
 
 #pragma mark 生命周期
@@ -105,10 +61,8 @@
     [self.view addSubview:_pageViewController.view];
     
 }
-
 // 隐藏状态栏
-- (BOOL)prefersStatusBarHidden { //设置隐藏显示
-    
+- (BOOL)prefersStatusBarHidden {
     return true;
 }
 
@@ -160,5 +114,48 @@
     
     return contentVC;
 }
+#pragma mark 网络请求方法
+/// 获取图书章节目录
+- (void)getBookChapter {
+    [HttpUtils post:BOOK_CHAPTERLIST_URL parameters:@{@"bookId":self.bookId} callBack:^(id data) {
+        NSLog(@"获取章节目录完成");
+        self.bookModel = [ReadBooksModel mj_objectWithKeyValues:data];
+        [self getChapterContent];
+    }];
+}
+/// 获取章节内容 默认为5章
+- (void)getChapterContent {
     
+    NSMutableArray *cacheList = [NSMutableArray array];
+    for (NSInteger index = self.utils.cacheNumber; index < self.utils.cacheNumber + 5; index++) {
+        BookChapter *chapter = self.bookModel.chapterList[index];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            [HttpUtils post:BOOK_CONTENT_URL parameters:@{@"bookId":chapter.bookId,@"cid":chapter.cid} callBack:^(id data) {
+                
+                ChapterContent *content = [ChapterContent mj_objectWithKeyValues:data];
+                content.txt = [content.txt stringByReplacingOccurrencesOfString:@"<br /><br />" withString:@"\n"];
+                [cacheList addObject:content];
+                // 如果数组里的模型数量为 5 对数组里的章节内容按升序排序
+                if (cacheList.count == 5) {
+                    [self.utils sortForcacheChapers:cacheList];
+                    [self setPageViewControllers];
+                }
+            }];
+        });
+    }
+}
+
+- (void)setPageViewControllers {
+    
+    if (self.pageViewController.viewControllers.count == 0) {
+        NSLog(@"pageviewcontroller 设置数据");
+        ContentViewController *initialViewController = [self viewControllerAtIndex:0 type:After];// 得到第一页
+        [_pageViewController setViewControllers:@[initialViewController]
+                                      direction:UIPageViewControllerNavigationDirectionReverse
+                                       animated:NO
+                                     completion:nil];
+    }
+}
+
 @end
