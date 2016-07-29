@@ -5,7 +5,6 @@
 //  Created by 泽i on 16/7/25.
 //  Copyright © 2016年 泽i. All rights reserved.
 //
-#define TYPELISTURL @"https://route.showapi.com/211-3"
 
 #define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
@@ -39,7 +38,7 @@
         make.edges.equalTo(self.view);
     }];
     
-    [HttpUtils post:TYPELISTURL parameters:nil callBack:^(id data) {
+    [HttpUtils post:BOOK_TYPELIST_URL parameters:nil callBack:^(id data) {
         NSLog(@"类型列表完成");
         self.typeList = [TypeList mj_objectWithKeyValues:data];
         [self.collectionView reloadData];

@@ -5,7 +5,6 @@
 //  Created by 泽i on 16/7/27.
 //  Copyright © 2016年 泽i. All rights reserved.
 //
-#import "PCH.pch"
 #import "ReadViewController.h"
 #import "ContentViewController.h"
 
@@ -71,7 +70,7 @@ typedef NS_ENUM(NSUInteger, ZEViewAppear) {
 
 /// 获取图书章节目录
 - (void)getBookChapter {
-    [HttpUtils post:@"https://route.showapi.com/211-1" parameters:@{@"bookId":self.bookId} callBack:^(id data) {
+    [HttpUtils post:BOOK_CHAPTERLIST_URL parameters:@{@"bookId":self.bookId} callBack:^(id data) {
         NSLog(@"获取章节目录完成");
         self.bookModel = [ReadBooksModel mj_objectWithKeyValues:data];
         [self getChapterContent];
@@ -85,7 +84,7 @@ typedef NS_ENUM(NSUInteger, ZEViewAppear) {
         BookChapter *chapter = self.bookModel.chapterList[index];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            [HttpUtils post:@"https://route.showapi.com/211-4" parameters:@{@"bookId":chapter.bookId,@"cid":chapter.cid} callBack:^(id data) {
+            [HttpUtils post:BOOK_CONTENT_URL parameters:@{@"bookId":chapter.bookId,@"cid":chapter.cid} callBack:^(id data) {
                 
                 ChapterContent *content = [ChapterContent mj_objectWithKeyValues:data];
                 content.txt = [content.txt stringByReplacingOccurrencesOfString:@"<br /><br />" withString:@"\n"];
@@ -216,6 +215,7 @@ typedef NS_ENUM(NSUInteger, ZEViewAppear) {
     contentVC.index = index;
     NSLog(@"当前章节CID &&&&&&&&&&&&&&&&&  %ld  #################### %@ ==================",self.currentChapter,[self.cacheChapter[self.currentChapter] cid]);
     NSString *text = [self calculatePagingData:[self.cacheChapter[self.currentChapter] txt] type:type];
+    contentVC.name = [self.cacheChapter[self.currentChapter] name];
     contentVC.content = [[NSAttributedString alloc]initWithString:text attributes:self.attributes];
     
     return contentVC;
@@ -235,7 +235,7 @@ typedef NS_ENUM(NSUInteger, ZEViewAppear) {
         return nil;
     } else {
         // 计算显示区域的Size
-        CGSize size = CGSizeMake(SCREEN_WIDTH-30, SCREEN_HEIGHT-20);
+        CGSize size = CGSizeMake(SCREEN_WIDTH-20, SCREEN_HEIGHT-50);
         // 设置初始的 截取范围
         NSRange range = NSMakeRange(0, 0);
         // 判断将要出现的位置

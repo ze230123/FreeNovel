@@ -13,6 +13,8 @@
 @interface ContentViewController : UIViewController
 /** 显示的字符串 */
 @property (nonatomic, copy) NSAttributedString *content;
+/** 章节名 */
+@property (nonatomic, copy) NSString *name;
 /** 页面编号 */
 @property (nonatomic, assign) NSInteger index;
 
