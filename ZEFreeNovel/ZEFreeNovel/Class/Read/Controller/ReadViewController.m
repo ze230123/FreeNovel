@@ -188,6 +188,10 @@ typedef NS_ENUM(NSUInteger, ZEViewAppear) {
     if (self.isLastPage) {
         index = 0;
         self.currentChapter++;
+        //当下一章节为缓存的倒数第二个章节时 请求跟多章节
+        if (self.currentChapter == self.cacheChapter.count - 1) {
+            [self getChapterContent];
+        }
         self.lastRange = NSMakeRange(0, 0);
         self.isLastPage = false;
         NSLog(@"******************* 下 *** 一 *** 章 **********************");
