@@ -1,0 +1,26 @@
+//
+//  PCH.pch
+//  ZEFreeNovel
+//
+//  Created by 泽i on 16/7/27.
+//  Copyright © 2016年 泽i. All rights reserved.
+//
+
+#ifndef PCH_pch
+#define PCH_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+
+//extern NSString *ut = @"https://route.showapi.com/211-3";
+//const NSString *
+
+#import "HttpUtils.h"
+
+#import <MJExtension.h>
+#import <Masonry.h>
+
+#endif /* PCH_pch */

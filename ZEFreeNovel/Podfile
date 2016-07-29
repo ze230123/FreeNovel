@@ -1,0 +1,10 @@
+platform:ios,'8.0'
+
+
+target 'ZEFreeNovel' do
+
+pod 'AFNetworking'
+pod 'Masonry'
+pod 'MJExtension'
+
+end
