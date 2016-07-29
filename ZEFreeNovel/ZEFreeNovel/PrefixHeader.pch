@@ -1,0 +1,25 @@
+//
+//  PrefixHeader.pch
+//  ZEFreeNovel
+//
+//  Created by 泽i on 16/7/29.
+//  Copyright © 2016年 泽i. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+
+#define BOOK_TYPELIST_URL @"https://route.showapi.com/211-3"
+#define BOOK_BOOKSLIST_URL @"https://route.showapi.com/211-2"
+#define BOOK_CHAPTERLIST_URL @"https://route.showapi.com/211-1"
+#define BOOK_CONTENT_URL @"https://route.showapi.com/211-4"
+
+
+#import "HttpUtils.h"
+#import <MJExtension.h>
+#import <Masonry.h>
+
+#endif /* PrefixHeader_pch */

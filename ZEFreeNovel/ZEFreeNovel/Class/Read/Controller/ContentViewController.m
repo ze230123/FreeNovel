@@ -12,7 +12,7 @@
 
 @interface ContentViewController ()
 
-@property (nonatomic, strong) UILabel *contentLabel;
+@property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UITextView *textView;
 
 @end
@@ -23,20 +23,34 @@
     [super viewDidLoad];
     [[UIApplication sharedApplication] setStatusBarHidden:true];
 
-    self.view.backgroundColor = kRandomColor;
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    _nameLabel = [[UILabel alloc]init];
+    _nameLabel.font = [UIFont systemFontOfSize:15];
+    
     _textView = [[UITextView alloc]init];
     _textView.userInteractionEnabled = false;
     _textView.selectable = false;
-    _textView.textContainerInset = UIEdgeInsetsMake(20, 10, 10, 10);
+    _textView.textContainerInset = UIEdgeInsetsMake(0, 10, 0, 10);
+    
+    [self.view addSubview:_nameLabel];
     [self.view addSubview:_textView];
+    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.equalTo(self.view);
+        make.left.equalTo(self.view).offset(20);
+        make.height.mas_equalTo(30);
+    }];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.left.right.equalTo(self.view);
+        make.top.equalTo(self.nameLabel.mas_bottom);
+        make.bottom.equalTo(self.view).offset(-20);
     }];
 }
 
 - (void) viewWillAppear:(BOOL)paramAnimated{
     [super viewWillAppear:paramAnimated];
     _textView.attributedText = _content;
+    _nameLabel.text = _name;
 }
 
 - (void)didReceiveMemoryWarning {

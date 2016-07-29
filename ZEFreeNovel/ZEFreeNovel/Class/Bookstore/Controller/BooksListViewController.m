@@ -6,8 +6,6 @@
 //  Copyright © 2016年 泽i. All rights reserved.
 //
 
-#define BOOKSLISTURL @"https://route.showapi.com/211-2"
-#import "PCH.pch"
 
 #import "BooksListViewController.h"
 #import "ReadViewController.h"
@@ -50,7 +48,7 @@
         make.edges.equalTo(self.view);
     }];
     
-    [HttpUtils post:BOOKSLISTURL parameters:@{@"typeId":self.type.Id} callBack:^(id data) {
+    [HttpUtils post:BOOK_BOOKSLIST_URL parameters:@{@"typeId":self.type.Id} callBack:^(id data) {
         self.listModel = [BooksListModel mj_objectWithKeyValues:data];
         [self.collectionView reloadData];
     }];
@@ -96,7 +94,7 @@
 #pragma mark 获取更多图书
 - (void)getMoreBooks {
     NSLog(@"更多图书");
-    [HttpUtils post:BOOKSLISTURL parameters:@{@"typeId":self.type.Id,@"page":self.listModel.currentPage.addOne} callBack:^(id data) {
+    [HttpUtils post:BOOK_BOOKSLIST_URL parameters:@{@"typeId":self.type.Id,@"page":self.listModel.currentPage.addOne} callBack:^(id data) {
         NSLog(@"书籍列表完成");
         BooksListModel *moreList = [BooksListModel mj_objectWithKeyValues:data];
         self.listModel.currentPage = moreList.currentPage;
