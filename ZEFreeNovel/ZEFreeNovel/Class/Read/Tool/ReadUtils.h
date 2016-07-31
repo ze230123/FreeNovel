@@ -28,11 +28,7 @@ typedef NS_ENUM(NSUInteger, ZEViewAppear) {
 /**
  *  阅读工具
  */
-@interface ReadUtils : NSObject {
-    NSInteger _cacheNumber;
-}
-/** 缓存章节数量 */
-@property (nonatomic, assign, readonly) NSInteger cacheNumber;
+@interface ReadUtils : NSObject
 
 /** 图书模型 */
 @property (nonatomic, strong) ReadBooksModel *bookModel;
@@ -87,7 +83,9 @@ typedef NS_ENUM(NSUInteger, ZEViewAppear) {
  *
  *  @return true Of false
  */
-- (BOOL)isReturnNilForIndex:(NSInteger)index;
+- (BOOL)isFirstPageForIndex:(NSInteger)index;
+- (BOOL)isLastPageForIndex:(NSInteger)index;
+
 
 - (instancetype)initWithBookId:(NSString *)BookId delegate:(id)delegate;
 

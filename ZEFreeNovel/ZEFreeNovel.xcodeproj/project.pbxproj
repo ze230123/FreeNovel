@@ -33,6 +33,9 @@
 		99908C7A1D4B799300B55879 /* ReadUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C791D4B799300B55879 /* ReadUtils.m */; };
 		99908C7D1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C7C1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m */; };
 		99908C811D4DC8E100B55879 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C801D4DC8E100B55879 /* BaseViewController.m */; };
+		99908C851D4DD5B000B55879 /* StacksUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C841D4DD5B000B55879 /* StacksUtils.m */; };
+		99908C881D4DDD3400B55879 /* ReadRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C871D4DDD3400B55879 /* ReadRecord.m */; };
+		99908C8B1D4E1D2000B55879 /* AFAppDotNetAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C8A1D4E1D2000B55879 /* AFAppDotNetAPIClient.m */; };
 		99FB9F671D463A3200C9C8AD /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB9F661D463A3200C9C8AD /* TabBarController.m */; };
 		99FB9F6A1D463EB800C9C8AD /* HttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB9F691D463EB800C9C8AD /* HttpUtils.m */; };
 		99FB9F711D4640DB00C9C8AD /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB9F701D4640DB00C9C8AD /* NSString+Extension.m */; };
@@ -112,6 +115,12 @@
 		99908C7C1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPageViewController+UIGestureRecognizers.m"; sourceTree = "<group>"; };
 		99908C7F1D4DC8E100B55879 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		99908C801D4DC8E100B55879 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		99908C831D4DD5B000B55879 /* StacksUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StacksUtils.h; sourceTree = "<group>"; };
+		99908C841D4DD5B000B55879 /* StacksUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StacksUtils.m; sourceTree = "<group>"; };
+		99908C861D4DDD3400B55879 /* ReadRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadRecord.h; sourceTree = "<group>"; };
+		99908C871D4DDD3400B55879 /* ReadRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadRecord.m; sourceTree = "<group>"; };
+		99908C891D4E1D2000B55879 /* AFAppDotNetAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAppDotNetAPIClient.h; sourceTree = "<group>"; };
+		99908C8A1D4E1D2000B55879 /* AFAppDotNetAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAppDotNetAPIClient.m; sourceTree = "<group>"; };
 		99FB9F651D463A3200C9C8AD /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		99FB9F661D463A3200C9C8AD /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		99FB9F681D463EB800C9C8AD /* HttpUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpUtils.h; sourceTree = "<group>"; };
@@ -214,6 +223,8 @@
 			children = (
 				992422781D4B2FA300C14F40 /* PageRangeModel.h */,
 				992422791D4B2FA300C14F40 /* PageRangeModel.m */,
+				99908C861D4DDD3400B55879 /* ReadRecord.h */,
+				99908C871D4DDD3400B55879 /* ReadRecord.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -319,6 +330,8 @@
 			children = (
 				99FB9F681D463EB800C9C8AD /* HttpUtils.h */,
 				99FB9F691D463EB800C9C8AD /* HttpUtils.m */,
+				99908C891D4E1D2000B55879 /* AFAppDotNetAPIClient.h */,
+				99908C8A1D4E1D2000B55879 /* AFAppDotNetAPIClient.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -326,6 +339,7 @@
 		997FC7AB1D46377300B725B9 /* Stacks */ = {
 			isa = PBXGroup;
 			children = (
+				99908C821D4DD58A00B55879 /* Tool */,
 				997FC7AD1D4637DA00B725B9 /* Controller */,
 			);
 			path = Stacks;
@@ -377,6 +391,15 @@
 			children = (
 				99908C781D4B799300B55879 /* ReadUtils.h */,
 				99908C791D4B799300B55879 /* ReadUtils.m */,
+			);
+			path = Tool;
+			sourceTree = "<group>";
+		};
+		99908C821D4DD58A00B55879 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				99908C831D4DD5B000B55879 /* StacksUtils.h */,
+				99908C841D4DD5B000B55879 /* StacksUtils.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -573,6 +596,8 @@
 			files = (
 				9924225D1D48ACAA00C14F40 /* BooksListCell.m in Sources */,
 				997FC7791D46349600B725B9 /* AppDelegate.m in Sources */,
+				99908C851D4DD5B000B55879 /* StacksUtils.m in Sources */,
+				99908C881D4DDD3400B55879 /* ReadRecord.m in Sources */,
 				992422711D48FC6700C14F40 /* ReadBooksModel.m in Sources */,
 				9924224C1D48920100C14F40 /* TypeModel.m in Sources */,
 				99908C7A1D4B799300B55879 /* ReadUtils.m in Sources */,
@@ -581,6 +606,7 @@
 				992422741D49091000C14F40 /* ChapterContent.m in Sources */,
 				992422591D48A88F00C14F40 /* BooksListViewController.m in Sources */,
 				992422561D48A2CD00C14F40 /* TypeListCell.m in Sources */,
+				99908C8B1D4E1D2000B55879 /* AFAppDotNetAPIClient.m in Sources */,
 				99FB9F671D463A3200C9C8AD /* TabBarController.m in Sources */,
 				9924227A1D4B2FA300C14F40 /* PageRangeModel.m in Sources */,
 				99FB9F6A1D463EB800C9C8AD /* HttpUtils.m in Sources */,

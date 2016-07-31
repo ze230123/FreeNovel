@@ -12,6 +12,7 @@
 #import "TypeModel.h"
 #import "TypeListCell.h"
 
+
 @interface BookstoreViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -29,12 +30,14 @@
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    
-    [HttpUtils post:BOOK_TYPELIST_URL parameters:nil callBack:^(id data) {
+    [HttpUtils post:BOOK_TYPELIST_URL parameters:nil callBack:^(id data, NSError *error) {
         NSLog(@"类型列表完成");
-        self.typeList = [TypeList mj_objectWithKeyValues:data];
-        [self.collectionView reloadData];
+        if (!error) {
+            self.typeList = [TypeList mj_objectWithKeyValues:data];
+            [self.collectionView reloadData];
+        }
     }];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {

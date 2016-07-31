@@ -18,7 +18,7 @@
  *  @param parameters 附加参数
  *  @param scusses    完成回调Block
  */
-+ (void)post:(NSString *)url parameters:(NSDictionary *)parameters callBack:(void(^)(id data))scusses;
++ (void)post:(NSString *)url parameters:(NSDictionary *)parameters callBack:(void(^)(id data, NSError *error))block;
 
 
 @end

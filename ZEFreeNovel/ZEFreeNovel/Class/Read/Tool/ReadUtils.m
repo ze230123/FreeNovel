@@ -11,20 +11,11 @@
 
 @interface ReadUtils ()
 
-/** 当前显示的页面编号 */
-@property (nonatomic, assign) NSInteger currentPage;
-/** 当前章节 */
-@property (nonatomic, assign) NSInteger currentChapter;
-/** 最后一次计算的Range */
-@property (nonatomic, assign) NSRange lastRange;
+/** 缓存章节数量 */
+@property (nonatomic, assign) NSInteger cacheNumber;
+
 /** 富文本样式 */
 @property (nonatomic, strong) NSDictionary *attributes;
-/** 缓存的章节内容 */
-@property (nonatomic, strong) NSMutableArray *cacheChapters;
-/** 章节每页Range数组 */
-@property (nonatomic, strong) NSMutableArray *PageRange;
-/** 是否当前章节最后一页 */
-@property (nonatomic, assign) BOOL isLastPage;
 
 @end
 
@@ -32,11 +23,6 @@
 
 - (instancetype)initWithBookId:(NSString *)BookId delegate:(id)delegate {
     if (self = [super init]) {
-        _cacheNumber = 0;
-        _currentChapter = 0;
-        _currentPage = 0;
-        _lastRange = NSMakeRange(0, 0);
-
         _delegate = delegate;
         [self getBookChapterForBookid:BookId];
     }
@@ -45,32 +31,37 @@
 #pragma mark 网络请求方法
 /// 获取图书章节目录
 - (void)getBookChapterForBookid:(NSString*)bookId {
-    [HttpUtils post:BOOK_CHAPTERLIST_URL parameters:@{@"bookId":bookId} callBack:^(id data) {
-        NSLog(@"获取章节目录完成");
-        self.bookModel = [ReadBooksModel mj_objectWithKeyValues:data];
-        [self getChapterContent];
+    [HttpUtils post:BOOK_CHAPTERLIST_URL parameters:@{@"bookId":bookId} callBack:^(id data, NSError *error) {
+        if (!error) {
+            NSLog(@"获取章节目录完成");
+            self.bookModel = [ReadBooksModel mj_objectWithKeyValues:data];
+            [self getChapterContent];
+        }
     }];
 }
-/// 获取章节内容 默认为5章
+// 获取章节内容 默认为5章
 - (void)getChapterContent {
-    
     NSMutableArray *cacheList = [NSMutableArray array];
     for (NSInteger index = self.cacheNumber; index < self.cacheNumber + 5; index++) {
-        BookChapter *chapter = self.bookModel.chapterList[index];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [HttpUtils post:BOOK_CONTENT_URL parameters:@{@"bookId":chapter.bookId,@"cid":chapter.cid} callBack:^(id data) {
-                ChapterContent *content = [ChapterContent mj_objectWithKeyValues:data];
-                content.txt = [content.txt stringByReplacingOccurrencesOfString:@"<br /><br />" withString:@"\n"];
-                [cacheList addObject:content];
-                // 如果数组里的模型数量为 5 对数组里的章节内容按升序排序
-                if (cacheList.count == 5) {
-                    [self sortForcacheChapers:cacheList];
-                    if ([self.delegate respondsToSelector:@selector(getChapterContentFinished)]) {
-                        [self.delegate getChapterContentFinished];
+        @autoreleasepool {
+            BookChapter *chapter = self.bookModel.chapterList[index];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [HttpUtils post:BOOK_CONTENT_URL parameters:@{@"bookId":chapter.bookId,@"cid":chapter.cid} callBack:^(id data, NSError *error) {
+                    if (!error) {
+                        ChapterContent *content = [ChapterContent mj_objectWithKeyValues:data];
+                        content.txt = [content.txt stringByReplacingOccurrencesOfString:@"<br /><br />" withString:@"\n"];
+                        [cacheList addObject:content];
+                        // 如果数组里的模型数量为 5 对数组里的章节内容按升序排序
+                        if (cacheList.count == 5) {
+                            [self sortForcacheChapers:cacheList];
+                            if ([self.delegate respondsToSelector:@selector(getChapterContentFinished)]) {
+                                [self.delegate getChapterContentFinished];
+                            }
+                        }
                     }
-                }
-            }];
-        });
+                }];
+            });
+        }
     }
 }
 
@@ -84,17 +75,17 @@
     [chapers sortUsingComparator:^NSComparisonResult(ChapterContent *obj1, ChapterContent *obj2) {
         return [obj1.cid compare:obj2.cid];
     }];
-    [self.cacheChapters addObjectsFromArray:chapers];
-    _cacheNumber = self.cacheChapters.count;
+    [self.bookModel.record.cacheChapters addObjectsFromArray:chapers];
+    self.cacheNumber = self.bookModel.record.cacheChapters.count;
 }
 
 - (NSString *)currentChapterName {
-    return [self.cacheChapters[self.currentChapter] name];
+    return [self.bookModel.record.cacheChapters[self.bookModel.record.currentChapter] name];
 }
 
 - (NSAttributedString *)pagingStringForType:(ZEViewAppear)direction {
 //    NSLog(@"当前章节CID &&&&&&&&&&&&&&&&&  %ld  #################### %@ ==================",self.currentChapter,[self.cacheChapters[self.currentChapter] cid]);
-    NSString *text = [self calculatePagingData:[self.cacheChapters[self.currentChapter] txt] type:direction];
+    NSString *text = [self calculatePagingData:[self.bookModel.record.cacheChapters[self.bookModel.record.currentChapter] txt] type:direction];
     return [[NSAttributedString alloc]initWithString:text attributes:self.attributes];
 }
 
@@ -103,50 +94,54 @@
     switch (direction) {
         case Before: {
             page--;
-            if (self.isLastPage) {
-                self.isLastPage = false;
+            if (self.bookModel.record.isLastPage) {
+                self.bookModel.record.isLastPage = false;
             }
             if (page < 0) {
 //                NSLog(@"******************* 上 *** 一 *** 章 **********************");
-                self.currentChapter--;
-                self.lastRange = NSMakeRange(0, 0);
-                page = [self.PageRange[self.currentChapter] rangeList].count - 1;
+                self.bookModel.record.currentChapter--;
+                self.bookModel.record.lastRange = NSMakeRange(0, 0);
+                page = [self.bookModel.record.PageRange[self.bookModel.record.currentChapter] rangeList].count - 1;
             }
             // 存储当前的页数
             break;
         }
         case After: {
             page++;
-            if (self.isLastPage) {
+            if (self.bookModel.record.isLastPage) {
                 page = 0;
-                self.currentChapter++;
+                self.bookModel.record.currentChapter++;
                 //当下一章节为缓存的倒数第二个章节时 请求跟多章节
-                self.lastRange = NSMakeRange(0, 0);
-                self.isLastPage = false;
+                [self isRequestMoreContent];
+                self.bookModel.record.lastRange = NSMakeRange(0, 0);
+                self.bookModel.record.isLastPage = false;
 //                NSLog(@"******************* 下 *** 一 *** 章 **********************");
             }
             break;
         }
     }
     NSLog(@"当前页数 ==================== %ld ===================",page);
-    self.currentPage = page;
+    self.bookModel.record.currentPage = page;
     return page;
 }
 
 - (void)isRequestMoreContent {
-    if ((self.currentChapter == self.cacheChapters.count - 1) && self.isLastPage) {
+    if ((self.bookModel.record.currentChapter == self.bookModel.record.cacheChapters.count - 2)) {
         [self getChapterContent];
     }
 }
-- (BOOL)isReturnNilForIndex:(NSInteger)index {
-    if ((self.currentChapter == 0 && index == 0) || (index == NSNotFound)) {
+- (BOOL)isFirstPageForIndex:(NSInteger)index {
+    if ((self.bookModel.record.currentChapter == 0 && index == 0) || (index == NSNotFound)) {
         return true;
     }
-    if ([self.PageRange.lastObject chapterNumber] == self.currentChapter) {
-        NSDictionary *range = [self.PageRange.lastObject rangeList].lastObject;
+    return false;
+}
+- (BOOL)isLastPageForIndex:(NSInteger)index {
+    if ([[self.bookModel.record.cacheChapters[self.bookModel.record.currentChapter] name] isEqualToString:self.bookModel.latestChapter]) {
+        NSDictionary *range = [self.bookModel.record.PageRange.lastObject rangeList].lastObject;
         NSInteger location = [range[@"location"] integerValue];
         NSInteger length = [range[@"length"] integerValue];
-        if (location + length == [self.cacheChapters[self.currentChapter] txt].length) {
+        if (location + length == [self.bookModel.record.cacheChapters[self.bookModel.record.currentChapter] txt].length) {
             return true;
         }
     }
@@ -167,9 +162,9 @@
             case Before: {
                 NSLog(@"上一页");
                 // 要显示的是上一页内容 直接在 lastPageRange 数组里 取得上一页的截取范围
-                PageRangeModel *pageRang = self.PageRange[self.currentChapter];
-                NSInteger location = [pageRang.rangeList[self.currentPage][@"location"] integerValue];
-                NSInteger length = [pageRang.rangeList[self.currentPage][@"length"] integerValue];
+                PageRangeModel *pageRang = self.bookModel.record.PageRange[self.bookModel.record.currentChapter];
+                NSInteger location = [pageRang.rangeList[self.bookModel.record.currentPage][@"location"] integerValue];
+                NSInteger length = [pageRang.rangeList[self.bookModel.record.currentPage][@"length"] integerValue];
                 // 设置正确的截取范围
                 range = NSMakeRange(location, length);
                 break;
@@ -178,16 +173,16 @@
                 NSLog(@"下一页");
                 // 要显示的是下一页内容
                 // 设置 初始 location 为 上一次计算的 location + length
-                NSInteger location = self.lastRange.location + self.lastRange.length;
+                NSInteger location = self.bookModel.record.lastRange.location + self.bookModel.record.lastRange.length;
                 // 设置 初始 length
                 // 如果 初始location + 250 大于 text.length 说明 将要显示章节的最后一页
                 NSInteger length = location + 250 < text.length ? 250 : text.length - location;
-                if (self.PageRange.count > self.currentChapter) {
-                    if ([self.PageRange[self.currentChapter] chapterNumber] == self.currentChapter) {
-                        if ([self.PageRange[self.currentChapter] rangeList].count > self.currentPage) {
-                            PageRangeModel *pageRang = self.PageRange[self.currentChapter];
-                            location = [pageRang.rangeList[self.currentPage][@"location"] integerValue];
-                            length = [pageRang.rangeList[self.currentPage][@"length"] integerValue];
+                if (self.bookModel.record.PageRange.count > self.bookModel.record.currentChapter) {
+                    if ([self.bookModel.record.PageRange[self.bookModel.record.currentChapter] chapterNumber] == self.bookModel.record.currentChapter) {
+                        if ([self.bookModel.record.PageRange[self.bookModel.record.currentChapter] rangeList].count > self.bookModel.record.currentPage) {
+                            PageRangeModel *pageRang = self.bookModel.record.PageRange[self.bookModel.record.currentChapter];
+                            location = [pageRang.rangeList[self.bookModel.record.currentPage][@"location"] integerValue];
+                            length = [pageRang.rangeList[self.bookModel.record.currentPage][@"length"] integerValue];
                         }
                     }
                 }
@@ -229,27 +224,27 @@
 //                    NSLog(@"……………………………………………  计算高度  小于  初始高度  ……………………………………………");
                 }
                 // 设置存储每页截取范围的字典
-                NSDictionary *dict = @{@"location":@(range.location),@"length":@(range.length),@"page":@(self.currentPage)};
+                NSDictionary *dict = @{@"location":@(range.location),@"length":@(range.length),@"page":@(self.bookModel.record.currentPage)};
                 // 创建范围模型
-                PageRangeModel *rangeModel = [[PageRangeModel alloc]initWithNumber:self.currentChapter];
+                PageRangeModel *rangeModel = [[PageRangeModel alloc]initWithNumber:self.bookModel.record.currentChapter];
                 // 当 缓存每页范围的数组为空时 或者 数组元素个数 等于当前章节时 将字典添加到范围模型  将范围模型添加到缓存数组中
                 // 当 缓存数组个数大于当前章节 且 缓存数组中当前章节的范围模型 不包含 相同的字典是 将字典添加到 当前章节的范围模型中
-                if (!self.PageRange.count || self.PageRange.count == self.currentChapter ) {
+                if (!self.bookModel.record.PageRange.count || self.bookModel.record.PageRange.count == self.bookModel.record.currentChapter ) {
                     
                     [rangeModel.rangeList addObject:dict];
-                    [self.PageRange addObject:rangeModel];
+                    [self.bookModel.record.PageRange addObject:rangeModel];
                     NSLog(@"数组添加模型");
-                } else if (self.PageRange.count > self.currentChapter && !([[self.PageRange[self.currentChapter] rangeList] containsObject:dict])) {
+                } else if (self.bookModel.record.PageRange.count > self.bookModel.record.currentChapter && !([[self.bookModel.record.PageRange[self.bookModel.record.currentChapter] rangeList] containsObject:dict])) {
                     
-                    [[self.PageRange[self.currentChapter] rangeList] addObject:dict];
+                    [[self.bookModel.record.PageRange[self.bookModel.record.currentChapter] rangeList] addObject:dict];
                     NSLog(@"数组里模型添加字典");
                 }
-                NSLog(@"%@",self.PageRange);
+                NSLog(@"%@",self.bookModel.record.PageRange);
 //                NSLog(@"***************************************************************************************");
                 // 当前为最后一页时
                 if (range.location + range.length == text.length) {
                     
-                    self.isLastPage = true;
+                    self.bookModel.record.isLastPage = true;
                     NSLog(@"最后一页");
                 }
                 
@@ -257,7 +252,7 @@
             }
         }
         // 存储刚计算好的截取范围
-        self.lastRange = range;
+        self.bookModel.record.lastRange = range;
         return [text substringWithRange:range];
     }
 }
@@ -276,19 +271,9 @@
     return _attributes;
 }
 
-- (NSMutableArray *)cacheChapters {
-    if (_cacheChapters == nil) {
-        _cacheChapters = [NSMutableArray array];
-    }
-    return _cacheChapters;
+
+- (void)dealloc {
+    self.bookModel = nil;
+    NSLog(@"%@ 工具被销毁",[[self class] description]);
 }
-
-- (NSMutableArray *)PageRange {
-    if (_PageRange == nil) {
-        _PageRange = [NSMutableArray array];
-    }
-    return _PageRange;
-}
-
-
 @end

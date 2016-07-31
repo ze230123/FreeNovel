@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) ReadUtils *utils;
 @property (nonatomic, strong) UIView *tapView;
+//@property (nonatomic, strong) UIAlertController *alert;
 @property (nonatomic, strong) UIPageViewController *pageViewController;
 
 @end
@@ -32,20 +33,29 @@
 #pragma mark 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    UIBarButtonItem *barButtonItemLeft=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(navigationPopView)];
+    [[self navigationItem] setLeftBarButtonItem:barButtonItemLeft];
+
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     [self.navigationController setNavigationBarHidden:YES animated:false];
-
+    
     NSDictionary *options = @{UIPageViewControllerOptionSpineLocationKey : @(UIPageViewControllerSpineLocationMin)};
     _pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl
                                                           navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
                                                                         options:options];
+    
     // 设置UIPageViewController代理和数据源
     _pageViewController.delegate = self;
     _pageViewController.dataSource = self;
     _pageViewController.view.frame = self.view.bounds;
     [self addChildViewController:_pageViewController];
     [self.view addSubview:_pageViewController.view];
+
+}
+
+- (void)navigationPopView {
+//    [self presentViewController:[self alert] animated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:false];
 }
 
 - (void)showhide {
@@ -75,7 +85,7 @@
 - (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
     NSInteger index = ((ContentViewController *)viewController).index;
     // 当前章节和当前页数都为0 代表当前为图书第一张的第一页
-    if ([self.utils isReturnNilForIndex:index]) {
+    if ([self.utils isFirstPageForIndex:index]) {
         return nil;
     }
     NSInteger page = [self.utils pageForIndex:index type:Before];
@@ -83,11 +93,11 @@
 }
 - (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
     NSInteger index = ((ContentViewController *)viewController).index;
-    if ([self.utils isReturnNilForIndex:index]) {
+    if ([self.utils isLastPageForIndex:index]) {
         return nil;
     }
     NSInteger page = [self.utils pageForIndex:index type:After];
-    [self.utils isRequestMoreContent];
+//    [self.utils isRequestMoreContent];
     return [self viewControllerAtIndex:page type:After];
 }
 
@@ -115,7 +125,7 @@
         ContentViewController *initialViewController = [self viewControllerAtIndex:0 type:After];// 得到第一页
         [_pageViewController setViewControllers:@[initialViewController]
                                       direction:UIPageViewControllerNavigationDirectionReverse
-                                       animated:NO
+                                       animated:true
                                      completion:nil];
     }
 }
@@ -129,5 +139,27 @@
         [_tapView addGestureRecognizer:tap];
     }
     return _tapView;
+}
+
+- (UIAlertController *)alert {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"觉得这本书不错，就加入书架吧" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *clAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popViewControllerAnimated:false];
+            [self dismissViewControllerAnimated:true completion:nil];
+        }];
+        UIAlertAction *addAction = [UIAlertAction actionWithTitle:@"加入书架" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"AddStacks" object:self userInfo:@{@"book":self.utils.bookModel}];
+            [self.navigationController popViewControllerAnimated:false];
+            [self dismissViewControllerAnimated:true completion:nil];
+        }];
+        [alert addAction:clAction];
+        [alert addAction:addAction];
+    return alert;
+}
+
+- (void)dealloc {
+//    self.pageViewController = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    NSLog(@"%@ 控制器被销毁",[[self class] description]);
 }
 @end

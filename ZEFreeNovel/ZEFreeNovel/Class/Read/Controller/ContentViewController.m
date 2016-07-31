@@ -19,30 +19,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[UIApplication sharedApplication] setStatusBarHidden:true];
 
     self.view.backgroundColor = [UIColor whiteColor];
     
-    _nameLabel = [[UILabel alloc]init];
+    _nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, SCREEN_WIDTH-20, 30)];
     _nameLabel.font = [UIFont systemFontOfSize:15];
     
-    _textView = [[UITextView alloc]init];
+    _textView = [[UITextView alloc]initWithFrame:CGRectMake(0, 30, SCREEN_WIDTH, SCREEN_HEIGHT-50)];
     _textView.userInteractionEnabled = false;
-//    _textView.selectable = false;
     _textView.textContainerInset = UIEdgeInsetsMake(0, 10, 0, 10);
     
     [self.view addSubview:_nameLabel];
     [self.view addSubview:_textView];
-    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.equalTo(self.view);
-        make.left.equalTo(self.view).offset(20);
-        make.height.mas_equalTo(30);
-    }];
-    [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.view);
-        make.top.equalTo(self.nameLabel.mas_bottom);
-        make.bottom.equalTo(self.view).offset(-20);
-    }];
 }
 
 - (void) viewWillAppear:(BOOL)paramAnimated{
@@ -57,6 +45,8 @@
 }
 
 - (void)dealloc {
+    self.nameLabel = nil;
+    self.textView = nil;
     NSLog(@"%@ 控制器被销毁 第 %ld 页",[[self class] description],self.index);
 }
 
