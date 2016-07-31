@@ -9,6 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "BookChapter.h"
 #import "ChapterContent.h"
+#import "ReadBooksModel.h"
+
+
+@protocol ReadUtilsDelegate <NSObject>
+
+- (void)getChapterContentFinished;
+
+@end
 
 /** 视图将要出现的位置 */
 typedef NS_ENUM(NSUInteger, ZEViewAppear) {
@@ -25,13 +33,14 @@ typedef NS_ENUM(NSUInteger, ZEViewAppear) {
 }
 /** 缓存章节数量 */
 @property (nonatomic, assign, readonly) NSInteger cacheNumber;
-/**
- *  对数组排序
- *
- *  @param chapers 内容缓存数组
- */
-- (void)sortForcacheChapers:(NSMutableArray *)chapers;
-//- (void)getChapterContent;
+
+/** 图书模型 */
+@property (nonatomic, strong) ReadBooksModel *bookModel;
+
+@property (nonatomic, weak) id <ReadUtilsDelegate>delegate;
+
+
+- (void)getChapterContent;
 /**
  *  获取当前章节名
  *
@@ -69,10 +78,8 @@ typedef NS_ENUM(NSUInteger, ZEViewAppear) {
 
 /**
  *  是否需要获取更多章节内容
- *
- *  @return true Of false
  */
-- (BOOL)isRequestMoreContent;
+- (void)isRequestMoreContent;
 /**
  *  判断是否返回空
  *
@@ -81,5 +88,7 @@ typedef NS_ENUM(NSUInteger, ZEViewAppear) {
  *  @return true Of false
  */
 - (BOOL)isReturnNilForIndex:(NSInteger)index;
+
+- (instancetype)initWithBookId:(NSString *)BookId delegate:(id)delegate;
 
 @end

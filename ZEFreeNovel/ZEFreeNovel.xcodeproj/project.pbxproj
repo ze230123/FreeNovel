@@ -31,6 +31,8 @@
 		997FC7B11D46383300B725B9 /* BookstoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7B01D46383300B725B9 /* BookstoreViewController.m */; };
 		997FC7B41D46384200B725B9 /* StacksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7B31D46384200B725B9 /* StacksViewController.m */; };
 		99908C7A1D4B799300B55879 /* ReadUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C791D4B799300B55879 /* ReadUtils.m */; };
+		99908C7D1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C7C1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m */; };
+		99908C811D4DC8E100B55879 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C801D4DC8E100B55879 /* BaseViewController.m */; };
 		99FB9F671D463A3200C9C8AD /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB9F661D463A3200C9C8AD /* TabBarController.m */; };
 		99FB9F6A1D463EB800C9C8AD /* HttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB9F691D463EB800C9C8AD /* HttpUtils.m */; };
 		99FB9F711D4640DB00C9C8AD /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB9F701D4640DB00C9C8AD /* NSString+Extension.m */; };
@@ -106,6 +108,10 @@
 		99908C761D4B72AF00B55879 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		99908C781D4B799300B55879 /* ReadUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadUtils.h; sourceTree = "<group>"; };
 		99908C791D4B799300B55879 /* ReadUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadUtils.m; sourceTree = "<group>"; };
+		99908C7B1D4CE0AE00B55879 /* UIPageViewController+UIGestureRecognizers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPageViewController+UIGestureRecognizers.h"; sourceTree = "<group>"; };
+		99908C7C1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPageViewController+UIGestureRecognizers.m"; sourceTree = "<group>"; };
+		99908C7F1D4DC8E100B55879 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		99908C801D4DC8E100B55879 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		99FB9F651D463A3200C9C8AD /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		99FB9F661D463A3200C9C8AD /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		99FB9F681D463EB800C9C8AD /* HttpUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpUtils.h; sourceTree = "<group>"; };
@@ -295,6 +301,8 @@
 			children = (
 				99FB9F6F1D4640DB00C9C8AD /* NSString+Extension.h */,
 				99FB9F701D4640DB00C9C8AD /* NSString+Extension.m */,
+				99908C7B1D4CE0AE00B55879 /* UIPageViewController+UIGestureRecognizers.h */,
+				99908C7C1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -358,6 +366,8 @@
 			children = (
 				99FB9F651D463A3200C9C8AD /* TabBarController.h */,
 				99FB9F661D463A3200C9C8AD /* TabBarController.m */,
+				99908C7F1D4DC8E100B55879 /* BaseViewController.h */,
+				99908C801D4DC8E100B55879 /* BaseViewController.m */,
 			);
 			path = RootController;
 			sourceTree = "<group>";
@@ -574,6 +584,7 @@
 				99FB9F671D463A3200C9C8AD /* TabBarController.m in Sources */,
 				9924227A1D4B2FA300C14F40 /* PageRangeModel.m in Sources */,
 				99FB9F6A1D463EB800C9C8AD /* HttpUtils.m in Sources */,
+				99908C7D1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m in Sources */,
 				9924226E1D48F84200C14F40 /* BookChapter.m in Sources */,
 				9924224F1D48971300C14F40 /* TypeList.m in Sources */,
 				992422681D48E4AF00C14F40 /* ReadViewController.m in Sources */,
@@ -582,6 +593,7 @@
 				997FC7B11D46383300B725B9 /* BookstoreViewController.m in Sources */,
 				992422631D48BCA600C14F40 /* BooksListModel.m in Sources */,
 				99FB9F711D4640DB00C9C8AD /* NSString+Extension.m in Sources */,
+				99908C811D4DC8E100B55879 /* BaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

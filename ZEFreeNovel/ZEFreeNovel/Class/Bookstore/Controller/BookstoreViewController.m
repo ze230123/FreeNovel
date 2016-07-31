@@ -6,9 +6,6 @@
 //  Copyright © 2016年 泽i. All rights reserved.
 //
 
-#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
-#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
-
 #import "BookstoreViewController.h"
 #import "BooksListViewController.h"
 #import "TypeList.h"
@@ -27,7 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor lightGrayColor];
     self.title = @"书城";
     [self.view addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -71,7 +67,7 @@
     
     self.hidesBottomBarWhenPushed=YES;
     BooksListViewController *booksList = [[BooksListViewController alloc]initWithType:self.typeList.typeList[indexPath.item]];
-    [self.navigationController pushViewController:booksList animated:true];
+    [self ze_pushViewController:booksList animated:true];
     self.hidesBottomBarWhenPushed=NO;
 }
 

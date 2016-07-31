@@ -5,11 +5,11 @@
 //  Created by 泽i on 16/7/27.
 //  Copyright © 2016年 泽i. All rights reserved.
 //
-#import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 #import "TypeModel.h"
 
 /// 图书列表视图控制器
-@interface BooksListViewController : UIViewController
+@interface BooksListViewController : BaseViewController
 
 /**
  *  初始化

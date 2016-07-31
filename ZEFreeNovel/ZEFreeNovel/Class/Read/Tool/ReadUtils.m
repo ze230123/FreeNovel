@@ -30,15 +30,55 @@
 
 @implementation ReadUtils
 
-- (instancetype)init {
+- (instancetype)initWithBookId:(NSString *)BookId delegate:(id)delegate {
     if (self = [super init]) {
         _cacheNumber = 0;
         _currentChapter = 0;
         _currentPage = 0;
         _lastRange = NSMakeRange(0, 0);
+
+        _delegate = delegate;
+        [self getBookChapterForBookid:BookId];
     }
     return self;
 }
+#pragma mark 网络请求方法
+/// 获取图书章节目录
+- (void)getBookChapterForBookid:(NSString*)bookId {
+    [HttpUtils post:BOOK_CHAPTERLIST_URL parameters:@{@"bookId":bookId} callBack:^(id data) {
+        NSLog(@"获取章节目录完成");
+        self.bookModel = [ReadBooksModel mj_objectWithKeyValues:data];
+        [self getChapterContent];
+    }];
+}
+/// 获取章节内容 默认为5章
+- (void)getChapterContent {
+    
+    NSMutableArray *cacheList = [NSMutableArray array];
+    for (NSInteger index = self.cacheNumber; index < self.cacheNumber + 5; index++) {
+        BookChapter *chapter = self.bookModel.chapterList[index];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [HttpUtils post:BOOK_CONTENT_URL parameters:@{@"bookId":chapter.bookId,@"cid":chapter.cid} callBack:^(id data) {
+                ChapterContent *content = [ChapterContent mj_objectWithKeyValues:data];
+                content.txt = [content.txt stringByReplacingOccurrencesOfString:@"<br /><br />" withString:@"\n"];
+                [cacheList addObject:content];
+                // 如果数组里的模型数量为 5 对数组里的章节内容按升序排序
+                if (cacheList.count == 5) {
+                    [self sortForcacheChapers:cacheList];
+                    if ([self.delegate respondsToSelector:@selector(getChapterContentFinished)]) {
+                        [self.delegate getChapterContentFinished];
+                    }
+                }
+            }];
+        });
+    }
+}
+
+/**
+ *  对数组排序
+ *
+ *  @param chapers 内容缓存数组
+ */
 
 - (void)sortForcacheChapers:(NSMutableArray *)chapers {
     [chapers sortUsingComparator:^NSComparisonResult(ChapterContent *obj1, ChapterContent *obj2) {
@@ -46,7 +86,6 @@
     }];
     [self.cacheChapters addObjectsFromArray:chapers];
     _cacheNumber = self.cacheChapters.count;
-    NSLog(@"获取章节内容完成");
 }
 
 - (NSString *)currentChapterName {
@@ -54,7 +93,7 @@
 }
 
 - (NSAttributedString *)pagingStringForType:(ZEViewAppear)direction {
-    NSLog(@"当前章节CID &&&&&&&&&&&&&&&&&  %ld  #################### %@ ==================",self.currentChapter,[self.cacheChapters[self.currentChapter] cid]);
+//    NSLog(@"当前章节CID &&&&&&&&&&&&&&&&&  %ld  #################### %@ ==================",self.currentChapter,[self.cacheChapters[self.currentChapter] cid]);
     NSString *text = [self calculatePagingData:[self.cacheChapters[self.currentChapter] txt] type:direction];
     return [[NSAttributedString alloc]initWithString:text attributes:self.attributes];
 }
@@ -68,7 +107,7 @@
                 self.isLastPage = false;
             }
             if (page < 0) {
-                NSLog(@"******************* 上 *** 一 *** 章 **********************");
+//                NSLog(@"******************* 上 *** 一 *** 章 **********************");
                 self.currentChapter--;
                 self.lastRange = NSMakeRange(0, 0);
                 page = [self.PageRange[self.currentChapter] rangeList].count - 1;
@@ -83,7 +122,8 @@
                 self.currentChapter++;
                 //当下一章节为缓存的倒数第二个章节时 请求跟多章节
                 self.lastRange = NSMakeRange(0, 0);
-                NSLog(@"******************* 下 *** 一 *** 章 **********************");
+                self.isLastPage = false;
+//                NSLog(@"******************* 下 *** 一 *** 章 **********************");
             }
             break;
         }
@@ -93,16 +133,22 @@
     return page;
 }
 
-- (BOOL)isRequestMoreContent {
+- (void)isRequestMoreContent {
     if ((self.currentChapter == self.cacheChapters.count - 1) && self.isLastPage) {
-        return YES;
+        [self getChapterContent];
     }
-    self.isLastPage = false;
-    return false;
 }
 - (BOOL)isReturnNilForIndex:(NSInteger)index {
     if ((self.currentChapter == 0 && index == 0) || (index == NSNotFound)) {
         return true;
+    }
+    if ([self.PageRange.lastObject chapterNumber] == self.currentChapter) {
+        NSDictionary *range = [self.PageRange.lastObject rangeList].lastObject;
+        NSInteger location = [range[@"location"] integerValue];
+        NSInteger length = [range[@"length"] integerValue];
+        if (location + length == [self.cacheChapters[self.currentChapter] txt].length) {
+            return true;
+        }
     }
     return false;
 }
@@ -136,6 +182,16 @@
                 // 设置 初始 length
                 // 如果 初始location + 250 大于 text.length 说明 将要显示章节的最后一页
                 NSInteger length = location + 250 < text.length ? 250 : text.length - location;
+                if (self.PageRange.count > self.currentChapter) {
+                    if ([self.PageRange[self.currentChapter] chapterNumber] == self.currentChapter) {
+                        if ([self.PageRange[self.currentChapter] rangeList].count > self.currentPage) {
+                            PageRangeModel *pageRang = self.PageRange[self.currentChapter];
+                            location = [pageRang.rangeList[self.currentPage][@"location"] integerValue];
+                            length = [pageRang.rangeList[self.currentPage][@"length"] integerValue];
+                        }
+                    }
+                }
+
                 // 设置初始 范围
                 range = NSMakeRange(location, length);
                 NSLog(@"初始   location = %ld , length = %ld textLength = %ld",range.location,range.length,text.length);
@@ -150,14 +206,14 @@
                     // 循环减少初始 length 的数值  直到初始 Size.height 小于显示区域的 height
                     while (textSize.height > size.height) {
                         range.length -= 1;
-                        NSLog(@"计算后   location = %ld , length = %ld %%%%%%%%%%%%%%%%%%",range.location,range.length);
+//                        NSLog(@"计算后   location = %ld , length = %ld %%%%%%%%%%%%%%%%%%",range.location,range.length);
                         textSize = [[text substringWithRange:range] boundingRectWithSize:size
                                                                                  options:NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading
                                                                               attributes:self.attributes
                                                                                  context:nil].size;
-                        NSLog(@"计算后  textHeight ===== %f  ,,,,   显示区域  height ====== %f",textSize.height,size.height);
+//                        NSLog(@"计算后  textHeight ===== %f  ,,,,   显示区域  height ====== %f",textSize.height,size.height);
                     }
-                    NSLog(@"^^^^^^^^^^^^^^   计算高度  大于  初始高度  ^^^^^^^^^^^^^^^^^^ ");
+//                    NSLog(@"^^^^^^^^^^^^^^   计算高度  大于  初始高度  ^^^^^^^^^^^^^^^^^^ ");
                     // 判断是否为最后一页
                 } else if (range.location + range.length != text.length) {
                     // 循环增加初始 length 的数值 直到初始Size.height 大于显示区域的 height
@@ -170,7 +226,7 @@
                     }
                     // 计算完成后 length 会多一个数 将多的减掉
                     range.length -= 1;
-                    NSLog(@"……………………………………………  计算高度  小于  初始高度  ……………………………………………");
+//                    NSLog(@"……………………………………………  计算高度  小于  初始高度  ……………………………………………");
                 }
                 // 设置存储每页截取范围的字典
                 NSDictionary *dict = @{@"location":@(range.location),@"length":@(range.length),@"page":@(self.currentPage)};
@@ -188,7 +244,8 @@
                     [[self.PageRange[self.currentChapter] rangeList] addObject:dict];
                     NSLog(@"数组里模型添加字典");
                 }
-                NSLog(@"***************************************************************************************");
+                NSLog(@"%@",self.PageRange);
+//                NSLog(@"***************************************************************************************");
                 // 当前为最后一页时
                 if (range.location + range.length == text.length) {
                     

@@ -57,7 +57,7 @@
 }
 
 - (void)dealloc {
-    NSLog(@"%@ 控制器被销毁",[[self class] description]);
+    NSLog(@"%@ 控制器被销毁 第 %ld 页",[[self class] description],self.index);
 }
 
 

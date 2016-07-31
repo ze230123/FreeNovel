@@ -39,7 +39,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
     self.title = self.type.name;
     
     [self.view addSubview:self.collectionView];
@@ -83,12 +82,10 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     BooksModel *model = self.listModel.contentlist[indexPath.item];
-    
     self.hidesBottomBarWhenPushed=YES;
     ReadViewController *read = [[ReadViewController alloc]initWithBooksInfo:model.Id];
-    [self.navigationController pushViewController:read animated:true];
+    [self ze_pushViewController:read animated:true];
 }
-
 
 #pragma mark 获取更多图书
 - (void)getMoreBooks {
