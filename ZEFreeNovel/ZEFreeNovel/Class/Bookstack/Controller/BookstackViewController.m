@@ -1,91 +1,87 @@
 //
-//  BookstoreViewController.m
+//  StacksViewController.m
 //  ZEFreeNovel
 //
 //  Created by 泽i on 16/7/25.
 //  Copyright © 2016年 泽i. All rights reserved.
 //
 
-#import "BookstoreViewController.h"
-#import "BooksListViewController.h"
-#import "TypeList.h"
-#import "TypeModel.h"
-#import "TypeListCell.h"
-
-
-@interface BookstoreViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
+#import "BookstackViewController.h"
+#import "ReadViewController.h"
+#import "BookstackCell.h"
+#import "Book.h"
+#import "PersistentStack.h"
+@interface BookstackViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) TypeList *typeList;
+@property (nonatomic, strong) NSArray *books;
 
 @end
 
-@implementation BookstoreViewController
+@implementation BookstackViewController
 #pragma mark 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.title = @"书城";
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.title = @"书库";
     [self.view addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    [HttpUtils post:BOOK_TYPELIST_URL parameters:nil callBack:^(id data, NSError *error) {
-        if (!error) {
-            NSLog(@"类型列表完成");
-            self.typeList = [TypeList mj_objectWithKeyValues:data];
-            [self.collectionView reloadData];
-        }
-    }];
-
 }
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    self.books = [Book resultWithPredicate:nil sortDescriptors:@[@{@"key":@"readTime",@"ascending":@(false)}] inContext:[PersistentStack stack].context];
+    [self.collectionView reloadData];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    NSLog(@"%@ 控制器被销毁",[[self class] description]);
+}
+
 #pragma mark UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.typeList.typeList.count;
+    return self.books.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    TypeListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TypeListCell" forIndexPath:indexPath];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BookStackCell" forIndexPath:indexPath];
     return cell;
 }
-
 #pragma mark UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    TypeModel *model = self.typeList.typeList[indexPath.item];
-    cell.backgroundColor = [UIColor lightGrayColor];
-    cell.layer.cornerRadius = 20;
-    [(TypeListCell *)cell setLableText:model.name];
+    Book *book = self.books[indexPath.item];
+    BookstackCell *stackCell = (BookstackCell *)cell;
+    [stackCell setImage:[UIImage imageNamed:@"book"]];
+    [stackCell setName:book.name];
 }
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    ReadViewController *read = [[ReadViewController alloc]initWithBooksInfo:self.books[indexPath.item]];
     self.hidesBottomBarWhenPushed=YES;
-    BooksListViewController *booksList = [[BooksListViewController alloc]initWithType:self.typeList.typeList[indexPath.item]];
-    [self ze_pushViewController:booksList animated:true];
+    [self.navigationController pushViewController:read animated:true];
     self.hidesBottomBarWhenPushed=NO;
 }
-
 #pragma mark 懒加载
 - (UICollectionView *)collectionView {
     if (_collectionView == nil) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc]init];
-        layout.itemSize = CGSizeMake((SCREEN_WIDTH-60)/2, (SCREEN_WIDTH-60)/4);
-        layout.minimumLineSpacing = 30;
-        layout.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20);
+        layout.itemSize = CGSizeMake((SCREEN_WIDTH-80)/3, ((SCREEN_WIDTH-80)/3)*1.7);
+        layout.minimumLineSpacing = 0;
+        layout.minimumInteritemSpacing = 0;
+        layout.sectionInset = UIEdgeInsetsMake(20, 20, 10, 20);
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
-        [_collectionView registerClass:[TypeListCell class] forCellWithReuseIdentifier:@"TypeListCell"];
+        [_collectionView registerClass:[BookstackCell class] forCellWithReuseIdentifier:@"BookStackCell"];
     }
     return _collectionView;
 }

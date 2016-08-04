@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface StacksViewController : UIViewController
+@interface BookstackViewController : UIViewController
 
 @end

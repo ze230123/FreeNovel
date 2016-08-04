@@ -89,7 +89,13 @@
     
     BooksModel *model = self.listModel.contentlist[indexPath.item];
     self.hidesBottomBarWhenPushed=YES;
-    ReadViewController *read = [[ReadViewController alloc]initWithBooksInfo:model.Id];
+    Book *book = [Book findOrCreateWithPredicate:[NSString stringWithFormat:@"bookId = %@",model.Id] inContext:[PersistentStack stack].context];
+    if (![book.isSave boolValue]) {
+        book.bookId = model.Id;
+        book.name = model.name;
+        book.isSave = @(false);
+    }
+    ReadViewController *read = [[ReadViewController alloc]initWithBooksInfo:book];
     [self ze_pushViewController:read animated:false];
 }
 

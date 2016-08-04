@@ -29,7 +29,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        _record = [[ReadRecord alloc]init];
+//        _record = [[ReadRecord alloc]init];
     }
     return self;
 }

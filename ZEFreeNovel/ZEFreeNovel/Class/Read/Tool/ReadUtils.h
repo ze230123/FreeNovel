@@ -10,11 +10,13 @@
 #import "BookChapter.h"
 #import "ChapterContent.h"
 #import "ReadBooksModel.h"
+#import "Book.h"
+#import "PersistentStack.h"
 
 
 @protocol ReadUtilsDelegate <NSObject>
 
-- (void)getChapterContentFinished;
+- (void)getChapterContentFinished; // 章节内容加载完成
 
 @end
 
@@ -29,14 +31,20 @@ typedef NS_ENUM(NSUInteger, ZEViewAppear) {
  *  阅读工具
  */
 @interface ReadUtils : NSObject
-
-/** 图书模型 */
-@property (nonatomic, strong) ReadBooksModel *bookModel;
+/** 书的ID */
+@property (nonatomic, copy) NSString *bookId;
+/** 阅读章节 */
+@property (nonatomic, assign) NSInteger readChapter;
+/** 阅读页数 */
+@property (nonatomic, assign) NSInteger readPage;
 
 @property (nonatomic, weak) id <ReadUtilsDelegate>delegate;
+/**
+ *  准备阅读
+ *  做一些阅读前的准备工作、比如请求数据查找数据
+ */
+- (void)readyRead;
 
-
-- (void)getChapterContent;
 /**
  *  获取当前章节名
  *
@@ -44,16 +52,6 @@ typedef NS_ENUM(NSUInteger, ZEViewAppear) {
  */
 - (NSString *)currentChapterName;
 
-/**
- *  计算每页的字数并返回截取后的字符串
- *
- *  @param text      要截取的字符串
- *  @param direction 截取的字符串要显示的位置
- *
- *  @return 截取好的字符串
- */
-
-- (NSString *)calculatePagingData:(NSString *)text type:(ZEViewAppear)direction;
 /**
  *  计算将要显示的页数
  *
@@ -85,8 +83,9 @@ typedef NS_ENUM(NSUInteger, ZEViewAppear) {
  */
 - (BOOL)isFirstPageForIndex:(NSInteger)index;
 - (BOOL)isLastPageForIndex:(NSInteger)index;
-
-
-- (instancetype)initWithBookId:(NSString *)BookId delegate:(id)delegate;
+/**
+ *  删除本地的阅读记录
+ */
+- (void)removeRecord;
 
 @end

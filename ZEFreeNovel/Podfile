@@ -6,6 +6,5 @@ target 'ZEFreeNovel' do
 pod 'AFNetworking'
 pod 'Masonry'
 pod 'MJExtension'
-pod 'FMDB'
 
 end

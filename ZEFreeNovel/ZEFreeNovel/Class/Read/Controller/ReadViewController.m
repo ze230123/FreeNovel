@@ -2,6 +2,7 @@
 //  ReadViewController.m
 //  ZEFreeNovel
 //
+
 //  Created by 泽i on 16/7/27.
 //  Copyright © 2016年 泽i. All rights reserved.
 //
@@ -13,19 +14,23 @@
 #import "UIPageViewController+UIGestureRecognizers.h"
 
 @interface ReadViewController () <UIPageViewControllerDataSource,UIPageViewControllerDelegate,ReadUtilsDelegate>
-
 @property (nonatomic, strong) ReadUtils *utils;
 @property (nonatomic, strong) UIView *tapView;
-//@property (nonatomic, strong) UIAlertController *alert;
+@property (nonatomic, strong) Book *model;
 @property (nonatomic, strong) UIPageViewController *pageViewController;
 
 @end
 
 @implementation ReadViewController
 
-- (instancetype)initWithBooksInfo:(NSString *)bookID {
+- (instancetype)initWithBooksInfo:(Book *)model {
     if (self = [super init]) {
-        _utils = [[ReadUtils alloc]initWithBookId:bookID delegate:self];
+        _model = model;
+        _utils = [[ReadUtils alloc]init];
+        _utils.delegate = self;
+        _utils.bookId = model.bookId;
+        _utils.readChapter = [model.readChapter integerValue];
+        _utils.readPage = [model.readPage integerValue];
     }
     return self;
 }
@@ -50,30 +55,11 @@
     _pageViewController.view.frame = self.view.bounds;
     [self addChildViewController:_pageViewController];
     [self.view addSubview:_pageViewController.view];
-
+    [self.utils readyRead];
 }
 
-- (void)navigationPopView {
-//    [self presentViewController:[self alert] animated:YES completion:nil];
-    [self.navigationController popViewControllerAnimated:false];
-}
-
-- (void)showhide {
-    NSLog(@"显示导航栏");
-    [self.navigationController setNavigationBarHidden:false animated:true];
-    [self.view addSubview:self.tapView];
-}
-- (void)hiddenNavigationBar {
-    NSLog(@"隐藏导航栏");
-    [self.navigationController setNavigationBarHidden:true animated:true];
-    [self.tapView removeFromSuperview];
-}
-// 隐藏状态栏
-- (BOOL)prefersStatusBarHidden {
-    if (self.navigationController.navigationBarHidden) {
-        return true;
-    }
-    return false;
+- (void)dealloc {
+    NSLog(@"%@ 控制器被销毁",[[self class] description]);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -118,11 +104,11 @@
 - (void)getChapterContentFinished {
     [self setPageViewControllers];
 }
-
+#pragma mark UI操作
 - (void)setPageViewControllers {
     if (self.pageViewController.viewControllers.count == 0) {
         NSLog(@"pageviewcontroller 设置数据");
-        ContentViewController *initialViewController = [self viewControllerAtIndex:0 type:After];// 得到第一页
+        ContentViewController *initialViewController = [self viewControllerAtIndex:[self.model.readPage integerValue] type:After];// 得到第一页
         [_pageViewController setViewControllers:@[initialViewController]
                                       direction:UIPageViewControllerNavigationDirectionReverse
                                        animated:true
@@ -130,6 +116,54 @@
     }
 }
 
+- (void)navigationPopView {
+    if (![self.model.isSave boolValue]) {
+        [self presentViewController:[self alert] animated:YES completion:nil];
+        return;
+    }
+    [self.navigationController popViewControllerAnimated:false];
+    [self saveRecord];
+}
+
+- (void)showhide {
+    NSLog(@"显示导航栏");
+    [self.navigationController setNavigationBarHidden:false animated:true];
+    [self.view addSubview:self.tapView];
+}
+- (void)hiddenNavigationBar {
+    NSLog(@"隐藏导航栏");
+    [self.navigationController setNavigationBarHidden:true animated:true];
+    [self.tapView removeFromSuperview];
+}
+// 隐藏状态栏
+- (BOOL)prefersStatusBarHidden {
+    if (self.navigationController.navigationBarHidden) {
+        return true;
+    }
+    return false;
+}
+
+#pragma mark 小说的保存或删除方法
+- (void)removeRecord {
+    [self.utils removeRecord];
+    NSError *error;
+    [[PersistentStack stack].context save:&error];
+    if (error) {
+        NSLog(@"error : %@",error.localizedDescription);
+    }
+}
+- (void)saveRecord {
+    Book *book = [Book findWithPredicate:[NSString stringWithFormat:@"bookId = %@",self.model.bookId] inContext:[PersistentStack stack].context];
+    book.readChapter = @(self.utils.readChapter);
+    book.readPage = @(self.utils.readPage);
+    book.isSave = @(true);
+    book.readTime = [NSDate date];
+    NSError *error;
+    [[PersistentStack stack].context save:&error];
+    if (error) {
+        NSLog(@"error : %@",error.localizedDescription);
+    }
+}
 #pragma mark 懒加载
 - (UIView *)tapView {
     if (_tapView == nil) {
@@ -144,22 +178,17 @@
 - (UIAlertController *)alert {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"觉得这本书不错，就加入书架吧" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *clAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+             [self removeRecord];
             [self.navigationController popViewControllerAnimated:false];
             [self dismissViewControllerAnimated:true completion:nil];
         }];
         UIAlertAction *addAction = [UIAlertAction actionWithTitle:@"加入书架" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"AddStacks" object:self userInfo:@{@"book":self.utils.bookModel}];
+            [self saveRecord];
             [self.navigationController popViewControllerAnimated:false];
             [self dismissViewControllerAnimated:true completion:nil];
         }];
         [alert addAction:clAction];
         [alert addAction:addAction];
     return alert;
-}
-
-- (void)dealloc {
-//    self.pageViewController = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    NSLog(@"%@ 控制器被销毁",[[self class] description]);
 }
 @end

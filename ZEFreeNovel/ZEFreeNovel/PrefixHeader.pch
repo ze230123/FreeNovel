@@ -19,6 +19,7 @@
 
 
 #import "HttpUtils.h"
+#import "PersistentStack.h"
 
 #import "NSString+Extension.h"
 

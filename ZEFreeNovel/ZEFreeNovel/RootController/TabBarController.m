@@ -8,7 +8,7 @@
 
 #import "TabBarController.h"
 
-#import "StacksViewController.h"
+#import "BookstackViewController.h"
 #import "BookstoreViewController.h"
 
 @interface TabBarController ()
@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    StacksViewController *stacks = [[StacksViewController alloc]init];
+    BookstackViewController *stacks = [[BookstackViewController alloc]init];
     UINavigationController *stacksNav = [[UINavigationController alloc]initWithRootViewController:stacks];
     stacksNav.title = @"书库";
     

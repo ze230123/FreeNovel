@@ -13,27 +13,19 @@
 
 @implementation HttpUtils
 
-+ (void)post:(NSString *)url parameters:(NSDictionary *)parameters callBack:(void(^)(id data, NSError *error))block {
-//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//
-//    [manager POST:url parameters:[HttpUtils createSecretParam:parameters] progress:^(NSProgress * _Nonnull uploadProgress) {
-//        
-//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        scusses(responseObject);
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        
-//    }];
-//    [manager invalidateSessionCancelingTasks:YES];
++ (void)post:(NSString *)url parameters:(NSDictionary *)parameters callBack:(void(^)(NSDictionary *data, NSError *error))block {
     [[AFAppDotNetAPIClient sharedClient] POST:url
                                    parameters:[HttpUtils createSecretParam:parameters]
                                      progress:nil
                                       success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                                                  if (block) {
-                                                     block(responseObject,nil);
+                                                     NSDictionary *dict = [responseObject mj_JSONObject];
+                                                     block(dict,nil);
                                                  }
                                              }
                                       failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                                  if (block) {
+                                                     NSLog(@"%@",error.localizedDescription);
                                                      block(nil,error);
                                                  }
                                              }];
@@ -59,6 +51,5 @@
     
     return paramet;
 }
-
 
 @end

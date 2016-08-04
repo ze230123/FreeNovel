@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "BooksModel.h"
-#import "ReadRecord.h"
 /**
  *  阅读图书模型
  */
@@ -26,6 +25,6 @@
 /** 章节目录列表 */
 @property (nonatomic, strong) NSArray *chapterList;
 /** 阅读记录 */
-@property (nonatomic, strong) ReadRecord *record;
+//@property (nonatomic, strong) ReadRecord *record;
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-#import "BooksModel.h"
+#import "Book.h"
 
 /**
  *  阅读模块
@@ -21,7 +21,8 @@
  *
  *  @return 实例对象
  */
-- (instancetype)initWithBooksInfo:(NSString *)bookID;
+- (instancetype)initWithBooksInfo:(Book *)model;
 
 - (void)showhide;
+
 @end
