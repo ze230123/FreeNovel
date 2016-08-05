@@ -118,7 +118,7 @@
 
 - (void)navigationPopView {
     if (![self.model.isSave boolValue]) {
-        [self presentViewController:[self alert] animated:YES completion:nil];
+        [self showAlert];
         return;
     }
     [self.navigationController popViewControllerAnimated:false];
@@ -146,11 +146,7 @@
 #pragma mark 小说的保存或删除方法
 - (void)removeRecord {
     [self.utils removeRecord];
-    NSError *error;
-    [[PersistentStack stack].context save:&error];
-    if (error) {
-        NSLog(@"error : %@",error.localizedDescription);
-    }
+    [[PersistentStack stack] save];
 }
 - (void)saveRecord {
     Book *book = [Book findWithPredicate:[NSString stringWithFormat:@"bookId = %@",self.model.bookId] inContext:[PersistentStack stack].context];
@@ -158,11 +154,7 @@
     book.readPage = @(self.utils.readPage);
     book.isSave = @(true);
     book.readTime = [NSDate date];
-    NSError *error;
-    [[PersistentStack stack].context save:&error];
-    if (error) {
-        NSLog(@"error : %@",error.localizedDescription);
-    }
+    [[PersistentStack stack] save];
 }
 #pragma mark 懒加载
 - (UIView *)tapView {
@@ -175,20 +167,18 @@
     return _tapView;
 }
 
-- (UIAlertController *)alert {
+- (void)showAlert {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"觉得这本书不错，就加入书架吧" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *clAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
              [self removeRecord];
             [self.navigationController popViewControllerAnimated:false];
-            [self dismissViewControllerAnimated:true completion:nil];
         }];
         UIAlertAction *addAction = [UIAlertAction actionWithTitle:@"加入书架" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self saveRecord];
             [self.navigationController popViewControllerAnimated:false];
-            [self dismissViewControllerAnimated:true completion:nil];
         }];
         [alert addAction:clAction];
         [alert addAction:addAction];
-    return alert;
+    [self presentViewController:alert animated:YES completion:nil];
 }
 @end

@@ -34,7 +34,18 @@
     }
     return self;
 }
-
+- (void)removeRecordWith:(NSString *)bookId {
+    NSString *string = [NSString stringWithFormat:@"bookId = %@",bookId];
+    [Book removeAllObjectWithPredicate:string inContext:[PersistentStack stack].context];
+    [Range removeAllObjectWithPredicate:string inContext:[PersistentStack stack].context];
+    [Chapter removeAllObjectWithPredicate:string inContext:[PersistentStack stack].context];
+}
+- (void)save {
+    NSError *error;
+    if (![self.context save:&error]) {
+        NSLog(@"error: %@",error);
+    }
+}
 - (void)setupManagedObjectContexts {
     self.context = [self setupManagedObjectContextWithConcurrencyType:NSMainQueueConcurrencyType];
     self.context.undoManager = [[NSUndoManager alloc]init];

@@ -57,10 +57,7 @@
                 [self.chapters addObject:chapter];
             }];
             NSLog(@"%ld",self.chapters.count);
-            NSError *error;
-            if (![[PersistentStack stack].context save:&error]) {
-                NSLog(@"error: %@",error.localizedDescription);
-            }
+            [[PersistentStack stack] save];
             [self getChapterContent];
         }
     }];
@@ -99,10 +96,7 @@
             Chapter *chapter = self.chapters[index];
             NSLog(@"cid = %@, txt = %@",chapter.cid,chapter.txt);
         }
-        NSError *error;
-        if (![[PersistentStack stack].context save:&error]) {
-            NSLog(@"error: %@",error.localizedDescription);
-        }
+        [[PersistentStack stack] save];
         self.cacheNumber += 5;
         [self startRead];
     });
@@ -253,10 +247,7 @@
                                @"isLastPage":@(self.isLastPage)};
         Range *pageRange = [Range insertNewObjectIntoContext:[PersistentStack stack].context];
         [pageRange loadFromDictionary:dict];
-        NSError *error;
-        if (![[PersistentStack stack].context save:&error]) {
-            NSLog(@"error: %@",error.localizedDescription);
-        }
+        [[PersistentStack stack] save];
         return txt;
     }
 }
