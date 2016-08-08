@@ -18,6 +18,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+    backItem.title = @"返回";
+    self.navigationItem.backBarButtonItem = backItem;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -26,10 +30,6 @@
 }
 
 - (void)ze_pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
-    backItem.title = @"返回";
-    self.navigationItem.backBarButtonItem = backItem;
     [self.navigationController pushViewController:viewController animated:animated];
 }
-
 @end

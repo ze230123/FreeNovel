@@ -30,6 +30,10 @@
     for (id range in result) {
         [context deleteObject:range];
     }
+    NSError *error;
+    if (![context save:&error]) {
+        NSLog(@"error: %@",error.localizedDescription);
+    }
 }
 
 + (NSInteger)countForPredicate:(NSString *)predicate inContext:(NSManagedObjectContext *)context {

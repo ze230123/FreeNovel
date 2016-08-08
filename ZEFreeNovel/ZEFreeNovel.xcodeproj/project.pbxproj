@@ -14,13 +14,14 @@
 		991E2D681D5113FC00CB997C /* Chapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2D621D5113FC00CB997C /* Chapter.m */; };
 		991E2D691D5113FC00CB997C /* Book+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2D641D5113FC00CB997C /* Book+CoreDataProperties.m */; };
 		991E2D6A1D5113FC00CB997C /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2D661D5113FC00CB997C /* Book.m */; };
-		991E2D6F1D51404000CB997C /* Range+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2D6C1D51404000CB997C /* Range+CoreDataProperties.m */; };
-		991E2D701D51404000CB997C /* Range.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2D6E1D51404000CB997C /* Range.m */; };
 		991E2D7B1D5322B800CB997C /* BookstackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2D7A1D5322B800CB997C /* BookstackCell.m */; };
+		991E2D7E1D54CF5900CB997C /* ChapterListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2D7D1D54CF5900CB997C /* ChapterListViewController.m */; };
+		991E2DCC1D574F9400CB997C /* TextDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2DCB1D574F9400CB997C /* TextDisplayView.m */; };
+		991E2DD21D58322400CB997C /* ReadDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2DD11D58322400CB997C /* ReadDataSource.m */; };
+		991E2DD51D5835AC00CB997C /* PagingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2DD41D5835AC00CB997C /* PagingUtils.m */; };
 		9924224C1D48920100C14F40 /* TypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9924224B1D48920100C14F40 /* TypeModel.m */; };
 		9924224F1D48971300C14F40 /* TypeList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9924224E1D48971300C14F40 /* TypeList.m */; };
 		992422561D48A2CD00C14F40 /* TypeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 992422551D48A2CD00C14F40 /* TypeListCell.m */; };
-		992422591D48A88F00C14F40 /* BooksListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992422581D48A88F00C14F40 /* BooksListViewController.m */; };
 		9924225D1D48ACAA00C14F40 /* BooksListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9924225C1D48ACAA00C14F40 /* BooksListCell.m */; };
 		992422601D48B92B00C14F40 /* BooksModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9924225F1D48B92B00C14F40 /* BooksModel.m */; };
 		992422631D48BCA600C14F40 /* BooksListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 992422621D48BCA600C14F40 /* BooksListModel.m */; };
@@ -40,10 +41,10 @@
 		997FC79A1D46349600B725B9 /* ZEFreeNovelUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7991D46349600B725B9 /* ZEFreeNovelUITests.m */; };
 		997FC7B11D46383300B725B9 /* BookstoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7B01D46383300B725B9 /* BookstoreViewController.m */; };
 		997FC7B41D46384200B725B9 /* BookstackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7B31D46384200B725B9 /* BookstackViewController.m */; };
-		99908C7A1D4B799300B55879 /* ReadUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C791D4B799300B55879 /* ReadUtils.m */; };
 		99908C7D1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C7C1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m */; };
 		99908C811D4DC8E100B55879 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C801D4DC8E100B55879 /* BaseViewController.m */; };
 		99908C8B1D4E1D2000B55879 /* AFAppDotNetAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C8A1D4E1D2000B55879 /* AFAppDotNetAPIClient.m */; };
+		9997E0771D58A75300CB53FA /* BooksListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992422581D48A88F00C14F40 /* BooksListViewController.m */; };
 		99FB9F671D463A3200C9C8AD /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB9F661D463A3200C9C8AD /* TabBarController.m */; };
 		99FB9F6A1D463EB800C9C8AD /* HttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB9F691D463EB800C9C8AD /* HttpUtils.m */; };
 		99FB9F711D4640DB00C9C8AD /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB9F701D4640DB00C9C8AD /* NSString+Extension.m */; };
@@ -84,12 +85,18 @@
 		991E2D641D5113FC00CB997C /* Book+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Book+CoreDataProperties.m"; sourceTree = "<group>"; };
 		991E2D651D5113FC00CB997C /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
 		991E2D661D5113FC00CB997C /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Book.m; sourceTree = "<group>"; };
-		991E2D6B1D51404000CB997C /* Range+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Range+CoreDataProperties.h"; sourceTree = "<group>"; };
-		991E2D6C1D51404000CB997C /* Range+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Range+CoreDataProperties.m"; sourceTree = "<group>"; };
-		991E2D6D1D51404000CB997C /* Range.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Range.h; sourceTree = "<group>"; };
-		991E2D6E1D51404000CB997C /* Range.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Range.m; sourceTree = "<group>"; };
 		991E2D791D5322B800CB997C /* BookstackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookstackCell.h; sourceTree = "<group>"; };
 		991E2D7A1D5322B800CB997C /* BookstackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookstackCell.m; sourceTree = "<group>"; };
+		991E2D7C1D54CF5900CB997C /* ChapterListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChapterListViewController.h; sourceTree = "<group>"; };
+		991E2D7D1D54CF5900CB997C /* ChapterListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChapterListViewController.m; sourceTree = "<group>"; };
+		991E2D7F1D54D35900CB997C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		991E2D801D54D35900CB997C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		991E2DCA1D574F9400CB997C /* TextDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextDisplayView.h; sourceTree = "<group>"; };
+		991E2DCB1D574F9400CB997C /* TextDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextDisplayView.m; sourceTree = "<group>"; };
+		991E2DD01D58322400CB997C /* ReadDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadDataSource.h; sourceTree = "<group>"; };
+		991E2DD11D58322400CB997C /* ReadDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadDataSource.m; sourceTree = "<group>"; };
+		991E2DD31D5835AC00CB997C /* PagingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagingUtils.h; sourceTree = "<group>"; };
+		991E2DD41D5835AC00CB997C /* PagingUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagingUtils.m; sourceTree = "<group>"; };
 		9924224A1D48920100C14F40 /* TypeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeModel.h; sourceTree = "<group>"; };
 		9924224B1D48920100C14F40 /* TypeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypeModel.m; sourceTree = "<group>"; };
 		9924224D1D48971300C14F40 /* TypeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeList.h; sourceTree = "<group>"; };
@@ -136,8 +143,6 @@
 		997FC7B21D46384200B725B9 /* BookstackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookstackViewController.h; sourceTree = "<group>"; };
 		997FC7B31D46384200B725B9 /* BookstackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookstackViewController.m; sourceTree = "<group>"; };
 		99908C761D4B72AF00B55879 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		99908C781D4B799300B55879 /* ReadUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadUtils.h; sourceTree = "<group>"; };
-		99908C791D4B799300B55879 /* ReadUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadUtils.m; sourceTree = "<group>"; };
 		99908C7B1D4CE0AE00B55879 /* UIPageViewController+UIGestureRecognizers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPageViewController+UIGestureRecognizers.h"; sourceTree = "<group>"; };
 		99908C7C1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPageViewController+UIGestureRecognizers.m"; sourceTree = "<group>"; };
 		99908C7F1D4DC8E100B55879 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -211,10 +216,6 @@
 				991E2D641D5113FC00CB997C /* Book+CoreDataProperties.m */,
 				991E2D651D5113FC00CB997C /* Book.h */,
 				991E2D661D5113FC00CB997C /* Book.m */,
-				991E2D6B1D51404000CB997C /* Range+CoreDataProperties.h */,
-				991E2D6C1D51404000CB997C /* Range+CoreDataProperties.m */,
-				991E2D6D1D51404000CB997C /* Range.h */,
-				991E2D6E1D51404000CB997C /* Range.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -233,6 +234,15 @@
 			children = (
 				991E2D791D5322B800CB997C /* BookstackCell.h */,
 				991E2D7A1D5322B800CB997C /* BookstackCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		991E2DC91D574F3E00CB997C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				991E2DCA1D574F9400CB997C /* TextDisplayView.h */,
+				991E2DCB1D574F9400CB997C /* TextDisplayView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -272,6 +282,7 @@
 		992422641D48E46700C14F40 /* Read */ = {
 			isa = PBXGroup;
 			children = (
+				991E2DC91D574F3E00CB997C /* View */,
 				99908C771D4B78D700B55879 /* Tool */,
 				992422771D4B2F7E00C14F40 /* Model */,
 				992422651D48E48900C14F40 /* Controller */,
@@ -286,6 +297,8 @@
 				992422671D48E4AF00C14F40 /* ReadViewController.m */,
 				992422691D48E70300C14F40 /* ContentViewController.h */,
 				9924226A1D48E70300C14F40 /* ContentViewController.m */,
+				991E2D7C1D54CF5900CB997C /* ChapterListViewController.h */,
+				991E2D7D1D54CF5900CB997C /* ChapterListViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -460,8 +473,10 @@
 		99908C771D4B78D700B55879 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
-				99908C781D4B799300B55879 /* ReadUtils.h */,
-				99908C791D4B799300B55879 /* ReadUtils.m */,
+				991E2DD01D58322400CB997C /* ReadDataSource.h */,
+				991E2DD11D58322400CB997C /* ReadDataSource.m */,
+				991E2DD31D5835AC00CB997C /* PagingUtils.h */,
+				991E2DD41D5835AC00CB997C /* PagingUtils.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -661,11 +676,10 @@
 				997FC7791D46349600B725B9 /* AppDelegate.m in Sources */,
 				992422711D48FC6700C14F40 /* ReadBooksModel.m in Sources */,
 				9924224C1D48920100C14F40 /* TypeModel.m in Sources */,
-				99908C7A1D4B799300B55879 /* ReadUtils.m in Sources */,
+				991E2DD51D5835AC00CB997C /* PagingUtils.m in Sources */,
 				992422601D48B92B00C14F40 /* BooksModel.m in Sources */,
 				997FC7B41D46384200B725B9 /* BookstackViewController.m in Sources */,
 				992422741D49091000C14F40 /* ChapterContent.m in Sources */,
-				992422591D48A88F00C14F40 /* BooksListViewController.m in Sources */,
 				992422561D48A2CD00C14F40 /* TypeListCell.m in Sources */,
 				991E2D6A1D5113FC00CB997C /* Book.m in Sources */,
 				991E2D0C1D50AE0D00CB997C /* ZEFreeNovel.xcdatamodeld in Sources */,
@@ -673,10 +687,11 @@
 				99908C8B1D4E1D2000B55879 /* AFAppDotNetAPIClient.m in Sources */,
 				99FB9F671D463A3200C9C8AD /* TabBarController.m in Sources */,
 				991E2D671D5113FC00CB997C /* Chapter+CoreDataProperties.m in Sources */,
+				991E2DD21D58322400CB997C /* ReadDataSource.m in Sources */,
 				991E2D7B1D5322B800CB997C /* BookstackCell.m in Sources */,
 				9924227A1D4B2FA300C14F40 /* PageRangeModel.m in Sources */,
 				99FB9F6A1D463EB800C9C8AD /* HttpUtils.m in Sources */,
-				991E2D6F1D51404000CB997C /* Range+CoreDataProperties.m in Sources */,
+				991E2DCC1D574F9400CB997C /* TextDisplayView.m in Sources */,
 				99908C7D1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m in Sources */,
 				9924226E1D48F84200C14F40 /* BookChapter.m in Sources */,
 				9924224F1D48971300C14F40 /* TypeList.m in Sources */,
@@ -687,9 +702,10 @@
 				9924226B1D48E70300C14F40 /* ContentViewController.m in Sources */,
 				997FC7B11D46383300B725B9 /* BookstoreViewController.m in Sources */,
 				992422631D48BCA600C14F40 /* BooksListModel.m in Sources */,
+				991E2D7E1D54CF5900CB997C /* ChapterListViewController.m in Sources */,
 				99FB9F711D4640DB00C9C8AD /* NSString+Extension.m in Sources */,
+				9997E0771D58A75300CB53FA /* BooksListViewController.m in Sources */,
 				99908C811D4DC8E100B55879 /* BaseViewController.m in Sources */,
-				991E2D701D51404000CB997C /* Range.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,6 +745,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				997FC77E1D46349600B725B9 /* Base */,
+				991E2D7F1D54D35900CB997C /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -737,6 +754,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				997FC7831D46349600B725B9 /* Base */,
+				991E2D801D54D35900CB997C /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

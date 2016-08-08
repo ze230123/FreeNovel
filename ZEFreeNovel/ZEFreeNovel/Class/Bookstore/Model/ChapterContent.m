@@ -19,7 +19,7 @@
 //}
 + (NSDictionary *)replacedKeyFromPropertyName {
     return @{
-             @"bookId" : @"showapi_res_body.id",
+             @"bookId" : @"showapi_res_body.bookId",
              @"name":@"showapi_res_body.cname",
              @"cid":@"showapi_res_body.cid",
              @"txt":@"showapi_res_body.txt"

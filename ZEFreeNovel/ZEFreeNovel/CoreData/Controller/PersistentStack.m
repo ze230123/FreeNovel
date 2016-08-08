@@ -36,13 +36,12 @@
 }
 - (void)removeRecordWith:(NSString *)bookId {
     NSString *string = [NSString stringWithFormat:@"bookId = %@",bookId];
-    [Book removeAllObjectWithPredicate:string inContext:[PersistentStack stack].context];
-    [Range removeAllObjectWithPredicate:string inContext:[PersistentStack stack].context];
-    [Chapter removeAllObjectWithPredicate:string inContext:[PersistentStack stack].context];
+    [Book removeAllObjectWithPredicate:string inContext:self.backgroundContext];
+    [Chapter removeAllObjectWithPredicate:string inContext:self.backgroundContext];
 }
 - (void)save {
     NSError *error;
-    if (![self.context save:&error]) {
+    if (![self.backgroundContext save:&error]) {
         NSLog(@"error: %@",error);
     }
 }

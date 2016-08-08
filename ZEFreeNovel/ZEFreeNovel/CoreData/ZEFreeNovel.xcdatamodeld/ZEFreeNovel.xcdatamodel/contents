@@ -15,16 +15,8 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="txt" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Range" representedClassName="Range" syncable="YES">
-        <attribute name="bookId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="cid" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="isLastPage" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="page" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <attribute name="txt" optional="YES" attributeType="String" syncable="YES"/>
-    </entity>
     <elements>
         <element name="Book" positionX="-632" positionY="-9" width="128" height="133"/>
-        <element name="Range" positionX="-495" positionY="-10" width="128" height="118"/>
         <element name="Chapter" positionX="-495" positionY="135" width="128" height="118"/>
     </elements>
 </model>

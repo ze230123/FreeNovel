@@ -37,12 +37,13 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    NSArray *result = [Book resultWithPredicate:nil sortDescriptors:@[@{@"key":@"readTime",@"ascending":@(false)}] inContext:[PersistentStack stack].context];
+        
+    NSArray *result = [Book resultWithPredicate:nil sortDescriptors:@[@{@"key":@"readTime",@"ascending":@(false)}] inContext:[PersistentStack stack].backgroundContext];
     [self.books removeAllObjects];
     [self.books addObjectsFromArray:result];
     [self.collectionView reloadData];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

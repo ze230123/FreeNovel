@@ -25,7 +25,7 @@
                                              }
                                       failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                                  if (block) {
-                                                     NSLog(@"%@",error.localizedDescription);
+                                                     NSLog(@"网络请求错误:%@",error.localizedDescription);
                                                      block(nil,error);
                                                  }
                                              }];

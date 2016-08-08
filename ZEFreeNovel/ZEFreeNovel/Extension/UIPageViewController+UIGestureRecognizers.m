@@ -14,7 +14,7 @@
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     
     CGPoint point = [gestureRecognizer locationInView:self.view];
-    NSLog(@"x == %f  , y == %f",point.x,point.y);
+//    NSLog(@"x == %f  , y == %f",point.x,point.y);
     if (point.x >= 80 && point.x <= SCREEN_WIDTH-80 && self.parentViewController.navigationController.navigationBarHidden) {
         if ([self.parentViewController respondsToSelector:@selector(showhide)]) {
             [self.parentViewController performSelector:@selector(showhide)];

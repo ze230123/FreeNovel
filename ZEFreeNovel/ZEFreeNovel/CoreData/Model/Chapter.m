@@ -15,6 +15,7 @@
     self.name = dictionary[@"name"];
     self.bookId = dictionary[@"bookId"];
     self.txt = @"";
+    self.isLoad = @(NO);
 }
 
 + (Chapter *)findOrCreatePodWithIdentifier:(NSString *)identifier inContext:(NSManagedObjectContext *)context
