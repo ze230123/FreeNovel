@@ -51,6 +51,7 @@
 
     self.hidesBottomBarWhenPushed = YES;
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willTerminate:) name:UIApplicationWillTerminateNotification object:nil];
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -63,6 +64,7 @@
     [self.navigationController setToolbarHidden:YES animated:false];
 }
 - (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSLog(@"%@ 控制器被销毁",[[self class] description]);
 }
 - (void)didReceiveMemoryWarning {
@@ -116,7 +118,6 @@
  *  根据页数和页面出现方向创建显示文字的控制器
  */
 - (ContentViewController *)viewControllerAtIndex:(NSUInteger)index {
-    
     // 创建一个新的控制器类，并且分配给相应的数据
     ContentViewController *contentVC = [[ContentViewController alloc] init];
     contentVC.index = index;
@@ -194,12 +195,15 @@
     return false;
 }
 #pragma mark 小说的保存或删除方法
-- (void)saveRecord {
+- (void)saveRecord{
     self.model.readChapter = @(self.datasource.currentChapterIndex);
     self.model.readPage = @([_pageViewController.viewControllers.lastObject index]);
     self.model.isSave = @(YES);
     self.model.readTime = [NSDate date];
     [[PersistentStack stack] save];
+}
+- (void)willTerminate:(NSNotification *)notification {
+    [self saveRecord];
 }
 #pragma mark 懒加载
 - (UIView *)tapView {

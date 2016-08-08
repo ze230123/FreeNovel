@@ -14,6 +14,8 @@
 
 @property (nonatomic, copy) SelectCallBack callback;
 @property (nonatomic, assign) BOOL ascending;
+
+@property (nonatomic, strong) Chapter *currentChapter;
 @end
 
 @implementation ChapterListViewController
@@ -37,6 +39,7 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    self.currentChapter = self.chapters[self.readChapter];
     if (self.readChapter - 7 > 0) {
         NSLog(@"当前章节：%ld",self.readChapter);
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.readChapter-7 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:NO];
@@ -72,7 +75,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.textLabel.textColor = [[self.chapters[indexPath.item] isLoad]boolValue] ? [UIColor blackColor] : [UIColor lightGrayColor];
     cell.textLabel.text = [self.chapters[indexPath.item] name];
-    if (self.readChapter == indexPath.row) {
+    if (self.currentChapter == self.chapters[indexPath.row]) {
         cell.textLabel.textColor = [UIColor blueColor];
     }
 }
