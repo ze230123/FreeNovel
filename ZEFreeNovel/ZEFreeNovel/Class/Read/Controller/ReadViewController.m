@@ -87,6 +87,7 @@
 }
 - (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
     NSInteger index = ((ContentViewController *)viewController).index;
+    NSLog(@"下一页 为 %ld 页",index-1);
     index++;
     if (index > self.datasource.lastPage) {
         [self.datasource nextChapter];
@@ -94,6 +95,18 @@
     }
     return [self viewControllerAtIndex:index];
 }
+- (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewControllers  {
+    NSLog(@"开始翻页");
+}
+- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray<UIViewController *> *)previousViewControllers transitionCompleted:(BOOL)completed {
+    if (completed) {
+        NSLog(@"翻页完成");
+    } else {
+//        NSLog(@"翻页未完成");
+        NSLog(@"翻页未完成%ld",[(ContentViewController*)(pageViewController.viewControllers.lastObject) index]);
+    }
+}
+
 
 #pragma mark - 根据index得到对应的UIViewController
 
@@ -118,6 +131,7 @@
  *  根据页数和页面出现方向创建显示文字的控制器
  */
 - (ContentViewController *)viewControllerAtIndex:(NSUInteger)index {
+    NSLog(@"创建第%ld页",index);
     // 创建一个新的控制器类，并且分配给相应的数据
     ContentViewController *contentVC = [[ContentViewController alloc] init];
     contentVC.index = index;
@@ -126,7 +140,7 @@
     contentVC.font = 25;
     return contentVC;
 }
-#pragma mark ReadUtilsDelegate
+#pragma mark ReadDataSourceDelegate
 - (void)dataSourceDidFinish {
     [self.datasource openChapter];
     [self initPageViewController:YES];
