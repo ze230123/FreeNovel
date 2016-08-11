@@ -7,7 +7,6 @@
 //
 
 #import "NSString+Extension.h"
-#import <CommonCrypto/CommonDigest.h>
 
 
 @implementation NSString (Extension)
@@ -36,4 +35,23 @@
 - (NSString *)paging:(NSRange)range {
     return [self substringWithRange:range];
 }
+
+- (NSString *)deleteRedundantHTMLTags {
+    return [self stringByReplacingOccurrencesOfString:@"<br /><br />" withString:@"<br/>"];
+}
+
+- (NSMutableAttributedString *)attributedString {
+    return [[NSMutableAttributedString alloc]initWithData:[self dataUsingEncoding:NSUnicodeStringEncoding]
+                                                  options:@{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType}
+                                       documentAttributes:nil
+                                                    error:nil];
+}
+
+- (NSString *)FirstLineAddSpaces {
+    NSMutableString *string = [NSMutableString stringWithString:[self stringByReplacingOccurrencesOfString:@"\n" withString:@"\n  "]];
+    [string insertString:@"  " atIndex:0];
+    return string;
+}
+
+
 @end

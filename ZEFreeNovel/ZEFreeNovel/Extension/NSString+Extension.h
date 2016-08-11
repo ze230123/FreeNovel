@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreText/CoreText.h>
+#import <CommonCrypto/CommonDigest.h>
 
 @interface NSString (Extension)
 /**
@@ -21,7 +23,12 @@
  *  @return 加一后的字符串
  */
 - (NSString *)addOne;
+/** 删除多余的HTML标签:<br /> */
+- (NSString *)deleteRedundantHTMLTags;
+/** 富文本字符串 */
+- (NSMutableAttributedString *)attributedString;
 
-- (NSString *)paging:(NSRange)range;
+- (NSString *)FirstLineAddSpaces;
+
 
 @end

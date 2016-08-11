@@ -6,18 +6,12 @@
 //  Copyright © 2016年 泽i. All rights reserved.
 //
 
-#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
-#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
-
 #import "BookstoreViewController.h"
 #import "BooksListViewController.h"
-#import "HttpUtils.h"
 #import "TypeList.h"
 #import "TypeModel.h"
 #import "TypeListCell.h"
 
-#import <MJExtension.h>
-#import <Masonry.h>
 
 @interface BookstoreViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 
@@ -31,18 +25,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor lightGrayColor];
     self.title = @"书城";
     [self.view addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    
-    [HttpUtils post:BOOK_TYPELIST_URL parameters:nil callBack:^(id data) {
-        NSLog(@"类型列表完成");
-        self.typeList = [TypeList mj_objectWithKeyValues:data];
-        [self.collectionView reloadData];
+    [HttpUtils post:BOOK_TYPELIST_URL parameters:nil callBack:^(id data, NSError *error) {
+        if (!error) {
+            NSLog(@"类型列表完成");
+            self.typeList = [TypeList mj_objectWithKeyValues:data];
+            [self.collectionView reloadData];
+        }
     }];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -75,7 +70,7 @@
     
     self.hidesBottomBarWhenPushed=YES;
     BooksListViewController *booksList = [[BooksListViewController alloc]initWithType:self.typeList.typeList[indexPath.item]];
-    [self.navigationController pushViewController:booksList animated:true];
+    [self ze_pushViewController:booksList animated:true];
     self.hidesBottomBarWhenPushed=NO;
 }
 

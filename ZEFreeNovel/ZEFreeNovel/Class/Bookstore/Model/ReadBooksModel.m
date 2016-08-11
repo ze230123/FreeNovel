@@ -26,6 +26,13 @@
              @"chapterList":@"showapi_res_body.book.chapterList"
              };
 }
+
+- (instancetype)init {
+    if (self = [super init]) {
+//        _record = [[ReadRecord alloc]init];
+    }
+    return self;
+}
 //showapi_res_body.book.
 //"showapi_res_body": {
 //    "book": {

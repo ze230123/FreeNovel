@@ -6,13 +6,13 @@
 //  Copyright © 2016年 泽i. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "BooksModel.h"
+#import "BaseViewController.h"
+#import "Book.h"
 
 /**
  *  阅读模块
  */
-@interface ReadViewController : UIViewController
+@interface ReadViewController : BaseViewController
 
 /**
  *  初始化
@@ -21,6 +21,8 @@
  *
  *  @return 实例对象
  */
-- (instancetype)initWithBooksInfo:(NSString *)bookID;
+- (instancetype)initWithBooksInfo:(Book *)model;
+
+- (void)showhide;
 
 @end

@@ -7,10 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		991E2D091D50AD3C00CB997C /* ModelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2D081D50AD3C00CB997C /* ModelObject.m */; };
+		991E2D0C1D50AE0D00CB997C /* ZEFreeNovel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 991E2D0A1D50AE0D00CB997C /* ZEFreeNovel.xcdatamodeld */; };
+		991E2D401D50DD0B00CB997C /* PersistentStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2D3F1D50DD0B00CB997C /* PersistentStack.m */; };
+		991E2D671D5113FC00CB997C /* Chapter+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2D601D5113FC00CB997C /* Chapter+CoreDataProperties.m */; };
+		991E2D681D5113FC00CB997C /* Chapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2D621D5113FC00CB997C /* Chapter.m */; };
+		991E2D691D5113FC00CB997C /* Book+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2D641D5113FC00CB997C /* Book+CoreDataProperties.m */; };
+		991E2D6A1D5113FC00CB997C /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2D661D5113FC00CB997C /* Book.m */; };
+		991E2D7B1D5322B800CB997C /* BookstackCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2D7A1D5322B800CB997C /* BookstackCell.m */; };
+		991E2D7E1D54CF5900CB997C /* ChapterListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2D7D1D54CF5900CB997C /* ChapterListViewController.m */; };
+		991E2DCC1D574F9400CB997C /* TextDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2DCB1D574F9400CB997C /* TextDisplayView.m */; };
+		991E2DD21D58322400CB997C /* ReadDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2DD11D58322400CB997C /* ReadDataSource.m */; };
+		991E2DD51D5835AC00CB997C /* PagingUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 991E2DD41D5835AC00CB997C /* PagingUtils.m */; };
 		9924224C1D48920100C14F40 /* TypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9924224B1D48920100C14F40 /* TypeModel.m */; };
 		9924224F1D48971300C14F40 /* TypeList.m in Sources */ = {isa = PBXBuildFile; fileRef = 9924224E1D48971300C14F40 /* TypeList.m */; };
 		992422561D48A2CD00C14F40 /* TypeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 992422551D48A2CD00C14F40 /* TypeListCell.m */; };
-		992422591D48A88F00C14F40 /* BooksListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992422581D48A88F00C14F40 /* BooksListViewController.m */; };
 		9924225D1D48ACAA00C14F40 /* BooksListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9924225C1D48ACAA00C14F40 /* BooksListCell.m */; };
 		992422601D48B92B00C14F40 /* BooksModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9924225F1D48B92B00C14F40 /* BooksModel.m */; };
 		992422631D48BCA600C14F40 /* BooksListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 992422621D48BCA600C14F40 /* BooksListModel.m */; };
@@ -29,7 +40,11 @@
 		997FC78F1D46349600B725B9 /* ZEFreeNovelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC78E1D46349600B725B9 /* ZEFreeNovelTests.m */; };
 		997FC79A1D46349600B725B9 /* ZEFreeNovelUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7991D46349600B725B9 /* ZEFreeNovelUITests.m */; };
 		997FC7B11D46383300B725B9 /* BookstoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7B01D46383300B725B9 /* BookstoreViewController.m */; };
-		997FC7B41D46384200B725B9 /* StacksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7B31D46384200B725B9 /* StacksViewController.m */; };
+		997FC7B41D46384200B725B9 /* BookstackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7B31D46384200B725B9 /* BookstackViewController.m */; };
+		99908C7D1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C7C1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m */; };
+		99908C811D4DC8E100B55879 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C801D4DC8E100B55879 /* BaseViewController.m */; };
+		99908C8B1D4E1D2000B55879 /* AFAppDotNetAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C8A1D4E1D2000B55879 /* AFAppDotNetAPIClient.m */; };
+		9997E0771D58A75300CB53FA /* BooksListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992422581D48A88F00C14F40 /* BooksListViewController.m */; };
 		99FB9F671D463A3200C9C8AD /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB9F661D463A3200C9C8AD /* TabBarController.m */; };
 		99FB9F6A1D463EB800C9C8AD /* HttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB9F691D463EB800C9C8AD /* HttpUtils.m */; };
 		99FB9F711D4640DB00C9C8AD /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB9F701D4640DB00C9C8AD /* NSString+Extension.m */; };
@@ -57,6 +72,31 @@
 		0D48610260FCABA5EA3A80A3 /* libPods-ZEFreeNovel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZEFreeNovel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3396D2DDFBE807127D0CCB19 /* Pods-ZEFreeNovel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZEFreeNovel.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZEFreeNovel/Pods-ZEFreeNovel.release.xcconfig"; sourceTree = "<group>"; };
 		826AC7F24283B910CD788095 /* Pods-ZEFreeNovel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZEFreeNovel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ZEFreeNovel/Pods-ZEFreeNovel.debug.xcconfig"; sourceTree = "<group>"; };
+		991E2D071D50AD3C00CB997C /* ModelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelObject.h; sourceTree = "<group>"; };
+		991E2D081D50AD3C00CB997C /* ModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelObject.m; sourceTree = "<group>"; };
+		991E2D0B1D50AE0D00CB997C /* ZEFreeNovel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ZEFreeNovel.xcdatamodel; sourceTree = "<group>"; };
+		991E2D3E1D50DD0B00CB997C /* PersistentStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistentStack.h; sourceTree = "<group>"; };
+		991E2D3F1D50DD0B00CB997C /* PersistentStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistentStack.m; sourceTree = "<group>"; };
+		991E2D5F1D5113FC00CB997C /* Chapter+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Chapter+CoreDataProperties.h"; sourceTree = "<group>"; };
+		991E2D601D5113FC00CB997C /* Chapter+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Chapter+CoreDataProperties.m"; sourceTree = "<group>"; };
+		991E2D611D5113FC00CB997C /* Chapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chapter.h; sourceTree = "<group>"; };
+		991E2D621D5113FC00CB997C /* Chapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chapter.m; sourceTree = "<group>"; };
+		991E2D631D5113FC00CB997C /* Book+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Book+CoreDataProperties.h"; sourceTree = "<group>"; };
+		991E2D641D5113FC00CB997C /* Book+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Book+CoreDataProperties.m"; sourceTree = "<group>"; };
+		991E2D651D5113FC00CB997C /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
+		991E2D661D5113FC00CB997C /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Book.m; sourceTree = "<group>"; };
+		991E2D791D5322B800CB997C /* BookstackCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookstackCell.h; sourceTree = "<group>"; };
+		991E2D7A1D5322B800CB997C /* BookstackCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookstackCell.m; sourceTree = "<group>"; };
+		991E2D7C1D54CF5900CB997C /* ChapterListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChapterListViewController.h; sourceTree = "<group>"; };
+		991E2D7D1D54CF5900CB997C /* ChapterListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChapterListViewController.m; sourceTree = "<group>"; };
+		991E2D7F1D54D35900CB997C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		991E2D801D54D35900CB997C /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		991E2DCA1D574F9400CB997C /* TextDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextDisplayView.h; sourceTree = "<group>"; };
+		991E2DCB1D574F9400CB997C /* TextDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextDisplayView.m; sourceTree = "<group>"; };
+		991E2DD01D58322400CB997C /* ReadDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadDataSource.h; sourceTree = "<group>"; };
+		991E2DD11D58322400CB997C /* ReadDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadDataSource.m; sourceTree = "<group>"; };
+		991E2DD31D5835AC00CB997C /* PagingUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PagingUtils.h; sourceTree = "<group>"; };
+		991E2DD41D5835AC00CB997C /* PagingUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PagingUtils.m; sourceTree = "<group>"; };
 		9924224A1D48920100C14F40 /* TypeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeModel.h; sourceTree = "<group>"; };
 		9924224B1D48920100C14F40 /* TypeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypeModel.m; sourceTree = "<group>"; };
 		9924224D1D48971300C14F40 /* TypeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeList.h; sourceTree = "<group>"; };
@@ -100,9 +140,15 @@
 		997FC79B1D46349600B725B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		997FC7AF1D46383300B725B9 /* BookstoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookstoreViewController.h; sourceTree = "<group>"; };
 		997FC7B01D46383300B725B9 /* BookstoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookstoreViewController.m; sourceTree = "<group>"; };
-		997FC7B21D46384200B725B9 /* StacksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StacksViewController.h; sourceTree = "<group>"; };
-		997FC7B31D46384200B725B9 /* StacksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StacksViewController.m; sourceTree = "<group>"; };
+		997FC7B21D46384200B725B9 /* BookstackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookstackViewController.h; sourceTree = "<group>"; };
+		997FC7B31D46384200B725B9 /* BookstackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookstackViewController.m; sourceTree = "<group>"; };
 		99908C761D4B72AF00B55879 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		99908C7B1D4CE0AE00B55879 /* UIPageViewController+UIGestureRecognizers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPageViewController+UIGestureRecognizers.h"; sourceTree = "<group>"; };
+		99908C7C1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPageViewController+UIGestureRecognizers.m"; sourceTree = "<group>"; };
+		99908C7F1D4DC8E100B55879 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		99908C801D4DC8E100B55879 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		99908C891D4E1D2000B55879 /* AFAppDotNetAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAppDotNetAPIClient.h; sourceTree = "<group>"; };
+		99908C8A1D4E1D2000B55879 /* AFAppDotNetAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAppDotNetAPIClient.m; sourceTree = "<group>"; };
 		99FB9F651D463A3200C9C8AD /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		99FB9F661D463A3200C9C8AD /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		99FB9F681D463EB800C9C8AD /* HttpUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpUtils.h; sourceTree = "<group>"; };
@@ -147,6 +193,60 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		991E2CFF1D50A57B00CB997C /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				991E2D3D1D50DCDF00CB997C /* Controller */,
+				991E2D061D50ACDC00CB997C /* Model */,
+				991E2D0A1D50AE0D00CB997C /* ZEFreeNovel.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		991E2D061D50ACDC00CB997C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				991E2D071D50AD3C00CB997C /* ModelObject.h */,
+				991E2D081D50AD3C00CB997C /* ModelObject.m */,
+				991E2D5F1D5113FC00CB997C /* Chapter+CoreDataProperties.h */,
+				991E2D601D5113FC00CB997C /* Chapter+CoreDataProperties.m */,
+				991E2D611D5113FC00CB997C /* Chapter.h */,
+				991E2D621D5113FC00CB997C /* Chapter.m */,
+				991E2D631D5113FC00CB997C /* Book+CoreDataProperties.h */,
+				991E2D641D5113FC00CB997C /* Book+CoreDataProperties.m */,
+				991E2D651D5113FC00CB997C /* Book.h */,
+				991E2D661D5113FC00CB997C /* Book.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		991E2D3D1D50DCDF00CB997C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				991E2D3E1D50DD0B00CB997C /* PersistentStack.h */,
+				991E2D3F1D50DD0B00CB997C /* PersistentStack.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		991E2D781D53226200CB997C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				991E2D791D5322B800CB997C /* BookstackCell.h */,
+				991E2D7A1D5322B800CB997C /* BookstackCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		991E2DC91D574F3E00CB997C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				991E2DCA1D574F9400CB997C /* TextDisplayView.h */,
+				991E2DCB1D574F9400CB997C /* TextDisplayView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		992422461D4890F500C14F40 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,6 +282,8 @@
 		992422641D48E46700C14F40 /* Read */ = {
 			isa = PBXGroup;
 			children = (
+				991E2DC91D574F3E00CB997C /* View */,
+				99908C771D4B78D700B55879 /* Tool */,
 				992422771D4B2F7E00C14F40 /* Model */,
 				992422651D48E48900C14F40 /* Controller */,
 			);
@@ -195,6 +297,8 @@
 				992422671D48E4AF00C14F40 /* ReadViewController.m */,
 				992422691D48E70300C14F40 /* ContentViewController.h */,
 				9924226A1D48E70300C14F40 /* ContentViewController.m */,
+				991E2D7C1D54CF5900CB997C /* ChapterListViewController.h */,
+				991E2D7D1D54CF5900CB997C /* ChapterListViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -233,6 +337,7 @@
 		997FC7731D46349600B725B9 /* ZEFreeNovel */ = {
 			isa = PBXGroup;
 			children = (
+				991E2CFF1D50A57B00CB997C /* CoreData */,
 				997FC7AA1D46363100B725B9 /* Networking */,
 				997FC7A91D46361C00B725B9 /* Vender */,
 				997FC7A81D46361000B725B9 /* Extension */,
@@ -281,7 +386,7 @@
 			children = (
 				992422641D48E46700C14F40 /* Read */,
 				997FC7AC1D4637B200B725B9 /* Bookstore */,
-				997FC7AB1D46377300B725B9 /* Stacks */,
+				997FC7AB1D46377300B725B9 /* Bookstack */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -291,6 +396,8 @@
 			children = (
 				99FB9F6F1D4640DB00C9C8AD /* NSString+Extension.h */,
 				99FB9F701D4640DB00C9C8AD /* NSString+Extension.m */,
+				99908C7B1D4CE0AE00B55879 /* UIPageViewController+UIGestureRecognizers.h */,
+				99908C7C1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -307,16 +414,19 @@
 			children = (
 				99FB9F681D463EB800C9C8AD /* HttpUtils.h */,
 				99FB9F691D463EB800C9C8AD /* HttpUtils.m */,
+				99908C891D4E1D2000B55879 /* AFAppDotNetAPIClient.h */,
+				99908C8A1D4E1D2000B55879 /* AFAppDotNetAPIClient.m */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		997FC7AB1D46377300B725B9 /* Stacks */ = {
+		997FC7AB1D46377300B725B9 /* Bookstack */ = {
 			isa = PBXGroup;
 			children = (
+				991E2D781D53226200CB997C /* View */,
 				997FC7AD1D4637DA00B725B9 /* Controller */,
 			);
-			path = Stacks;
+			path = Bookstack;
 			sourceTree = "<group>";
 		};
 		997FC7AC1D4637B200B725B9 /* Bookstore */ = {
@@ -332,8 +442,8 @@
 		997FC7AD1D4637DA00B725B9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				997FC7B21D46384200B725B9 /* StacksViewController.h */,
-				997FC7B31D46384200B725B9 /* StacksViewController.m */,
+				997FC7B21D46384200B725B9 /* BookstackViewController.h */,
+				997FC7B31D46384200B725B9 /* BookstackViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -354,8 +464,21 @@
 			children = (
 				99FB9F651D463A3200C9C8AD /* TabBarController.h */,
 				99FB9F661D463A3200C9C8AD /* TabBarController.m */,
+				99908C7F1D4DC8E100B55879 /* BaseViewController.h */,
+				99908C801D4DC8E100B55879 /* BaseViewController.m */,
 			);
 			path = RootController;
+			sourceTree = "<group>";
+		};
+		99908C771D4B78D700B55879 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				991E2DD01D58322400CB997C /* ReadDataSource.h */,
+				991E2DD11D58322400CB997C /* ReadDataSource.m */,
+				991E2DD31D5835AC00CB997C /* PagingUtils.h */,
+				991E2DD41D5835AC00CB997C /* PagingUtils.m */,
+			);
+			path = Tool;
 			sourceTree = "<group>";
 		};
 		E77F7DE307DDE6B348B026BA /* Frameworks */ = {
@@ -548,26 +671,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				991E2D091D50AD3C00CB997C /* ModelObject.m in Sources */,
 				9924225D1D48ACAA00C14F40 /* BooksListCell.m in Sources */,
 				997FC7791D46349600B725B9 /* AppDelegate.m in Sources */,
 				992422711D48FC6700C14F40 /* ReadBooksModel.m in Sources */,
 				9924224C1D48920100C14F40 /* TypeModel.m in Sources */,
+				991E2DD51D5835AC00CB997C /* PagingUtils.m in Sources */,
 				992422601D48B92B00C14F40 /* BooksModel.m in Sources */,
-				997FC7B41D46384200B725B9 /* StacksViewController.m in Sources */,
+				997FC7B41D46384200B725B9 /* BookstackViewController.m in Sources */,
 				992422741D49091000C14F40 /* ChapterContent.m in Sources */,
-				992422591D48A88F00C14F40 /* BooksListViewController.m in Sources */,
 				992422561D48A2CD00C14F40 /* TypeListCell.m in Sources */,
+				991E2D6A1D5113FC00CB997C /* Book.m in Sources */,
+				991E2D0C1D50AE0D00CB997C /* ZEFreeNovel.xcdatamodeld in Sources */,
+				991E2D681D5113FC00CB997C /* Chapter.m in Sources */,
+				99908C8B1D4E1D2000B55879 /* AFAppDotNetAPIClient.m in Sources */,
 				99FB9F671D463A3200C9C8AD /* TabBarController.m in Sources */,
+				991E2D671D5113FC00CB997C /* Chapter+CoreDataProperties.m in Sources */,
+				991E2DD21D58322400CB997C /* ReadDataSource.m in Sources */,
+				991E2D7B1D5322B800CB997C /* BookstackCell.m in Sources */,
 				9924227A1D4B2FA300C14F40 /* PageRangeModel.m in Sources */,
 				99FB9F6A1D463EB800C9C8AD /* HttpUtils.m in Sources */,
+				991E2DCC1D574F9400CB997C /* TextDisplayView.m in Sources */,
+				99908C7D1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m in Sources */,
 				9924226E1D48F84200C14F40 /* BookChapter.m in Sources */,
 				9924224F1D48971300C14F40 /* TypeList.m in Sources */,
 				992422681D48E4AF00C14F40 /* ReadViewController.m in Sources */,
+				991E2D401D50DD0B00CB997C /* PersistentStack.m in Sources */,
 				997FC7761D46349600B725B9 /* main.m in Sources */,
+				991E2D691D5113FC00CB997C /* Book+CoreDataProperties.m in Sources */,
 				9924226B1D48E70300C14F40 /* ContentViewController.m in Sources */,
 				997FC7B11D46383300B725B9 /* BookstoreViewController.m in Sources */,
 				992422631D48BCA600C14F40 /* BooksListModel.m in Sources */,
+				991E2D7E1D54CF5900CB997C /* ChapterListViewController.m in Sources */,
 				99FB9F711D4640DB00C9C8AD /* NSString+Extension.m in Sources */,
+				9997E0771D58A75300CB53FA /* BooksListViewController.m in Sources */,
+				99908C811D4DC8E100B55879 /* BaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -607,6 +745,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				997FC77E1D46349600B725B9 /* Base */,
+				991E2D7F1D54D35900CB997C /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -615,6 +754,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				997FC7831D46349600B725B9 /* Base */,
+				991E2D801D54D35900CB997C /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -711,13 +851,15 @@
 			baseConfigurationReference = 826AC7F24283B910CD788095 /* Pods-ZEFreeNovel.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Qiaozong Meng (U4ZRHCMMEK)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ZEFreeNovel/PrefixHeader.pch";
 				INFOPLIST_FILE = ZEFreeNovel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ze230123.ZEFreeNovel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dfjr580.ZEFreeNovel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5d401799-c60b-4a64-9982-1e461cb4df94";
 			};
 			name = Debug;
 		};
@@ -726,13 +868,15 @@
 			baseConfigurationReference = 3396D2DDFBE807127D0CCB19 /* Pods-ZEFreeNovel.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/ZEFreeNovel/PrefixHeader.pch";
 				INFOPLIST_FILE = ZEFreeNovel/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ze230123.ZEFreeNovel;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dfjr580.ZEFreeNovel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5d401799-c60b-4a64-9982-1e461cb4df94";
 			};
 			name = Release;
 		};
@@ -822,6 +966,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		991E2D0A1D50AE0D00CB997C /* ZEFreeNovel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				991E2D0B1D50AE0D00CB997C /* ZEFreeNovel.xcdatamodel */,
+			);
+			currentVersion = 991E2D0B1D50AE0D00CB997C /* ZEFreeNovel.xcdatamodel */;
+			path = ZEFreeNovel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 997FC7691D46349600B725B9 /* Project object */;
 }

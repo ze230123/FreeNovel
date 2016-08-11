@@ -9,23 +9,27 @@
 #import "HttpUtils.h"
 #import "NSString+Extension.h"
 
-#import <AFNetworking.h>
+#import "AFAppDotNetAPIClient.h"
 
 @implementation HttpUtils
 
-+ (void)post:(NSString *)url parameters:(NSDictionary *)parameters callBack:(void (^)(id))scusses {
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-
-    [manager POST:url parameters:[HttpUtils createSecretParam:parameters] progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        scusses(responseObject);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-    }];
-
++ (void)post:(NSString *)url parameters:(NSDictionary *)parameters callBack:(void(^)(NSDictionary *data, NSError *error))block {
+    [[AFAppDotNetAPIClient sharedClient] POST:url
+                                   parameters:[HttpUtils createSecretParam:parameters]
+                                     progress:nil
+                                      success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                                 if (block) {
+                                                     NSDictionary *dict = [responseObject mj_JSONObject];
+                                                     block(dict,nil);
+                                                 }
+                                             }
+                                      failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                                 if (block) {
+                                                     NSLog(@"网络请求错误:%@",error.localizedDescription);
+                                                     block(nil,error);
+                                                 }
+                                             }];
 }
-// 
 + (NSDictionary *)createSecretParam:(NSDictionary*)param {
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     formatter.dateFormat = @"yyyyMMddHHmmss";
@@ -47,6 +51,5 @@
     
     return paramet;
 }
-
 
 @end

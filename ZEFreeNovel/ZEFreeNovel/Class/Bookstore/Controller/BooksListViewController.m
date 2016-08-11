@@ -14,7 +14,6 @@
 
 #import "BooksListCell.h"
 
-#import "NSString+Extension.h"
 
 @interface BooksListViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 /** 书籍列表模型 */
@@ -40,25 +39,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
     self.title = self.type.name;
     
     [self.view addSubview:self.collectionView];
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    
-    [HttpUtils post:BOOK_BOOKSLIST_URL parameters:@{@"typeId":self.type.Id} callBack:^(id data) {
-        self.listModel = [BooksListModel mj_objectWithKeyValues:data];
-        [self.collectionView reloadData];
+    [HttpUtils post:BOOK_BOOKSLIST_URL parameters:@{@"typeId":self.type.Id} callBack:^(id data, NSError *error) {
+        if (!error) {
+            self.listModel = [BooksListModel mj_objectWithKeyValues:data];
+            [self.collectionView reloadData];
+        }
     }];
 }
-
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 - (void)dealloc {
+    self.type = nil;
+    self.listModel = nil;
     NSLog(@"%@ 控制器被销毁",[[self class] description]);
 }
 #pragma mark UICollectionViewDataSource
@@ -84,22 +88,28 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
     BooksModel *model = self.listModel.contentlist[indexPath.item];
-    
     self.hidesBottomBarWhenPushed=YES;
-    ReadViewController *read = [[ReadViewController alloc]initWithBooksInfo:model.Id];
-    [self.navigationController pushViewController:read animated:true];
+    Book *book = [Book findOrCreateWithPredicate:[NSString stringWithFormat:@"bookId = %@",model.Id] inContext:[PersistentStack stack].backgroundContext];
+    if (![book.isSave boolValue]) {
+        book.bookId = model.Id;
+        book.name = model.name;
+        book.isSave = @(NO);
+    }
+    ReadViewController *read = [[ReadViewController alloc]initWithBooksInfo:book];
+    [self ze_pushViewController:read animated:false];
 }
-
 
 #pragma mark 获取更多图书
 - (void)getMoreBooks {
     NSLog(@"更多图书");
-    [HttpUtils post:BOOK_BOOKSLIST_URL parameters:@{@"typeId":self.type.Id,@"page":self.listModel.currentPage.addOne} callBack:^(id data) {
-        NSLog(@"书籍列表完成");
-        BooksListModel *moreList = [BooksListModel mj_objectWithKeyValues:data];
-        self.listModel.currentPage = moreList.currentPage;
-        [self.listModel.contentlist addObjectsFromArray:moreList.contentlist];
-        [self.collectionView reloadData];
+    [HttpUtils post:BOOK_BOOKSLIST_URL parameters:@{@"typeId":self.type.Id,@"page":self.listModel.currentPage.addOne} callBack:^(id data, NSError *error) {
+        if (!error) {
+            BooksListModel *moreList = [BooksListModel mj_objectWithKeyValues:data];
+            self.listModel.currentPage = moreList.currentPage;
+            [self.listModel.contentlist addObjectsFromArray:moreList.contentlist];
+            [self.collectionView reloadData];
+
+        }
     }];
 }
 
@@ -119,5 +129,4 @@
     }
     return _collectionView;
 }
-
 @end
