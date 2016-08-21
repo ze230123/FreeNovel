@@ -36,6 +36,7 @@
 
 - (instancetype)initWithBooksInfo:(Book *)model {
     if (self = [super init]) {
+#warning 需要抽取代码 ————  字体背景色的存取需要封装
         _textFont = [[NSUserDefaults standardUserDefaults] integerForKey:@"TextFont"] == 0 ? 25 : [[NSUserDefaults standardUserDefaults] integerForKey:@"TextFont"];
         _model = model;
         if ([model.isSave boolValue]) {
@@ -53,6 +54,7 @@
 #pragma mark 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
+#warning 需要抽取代码 ————  字体背景色的存取需要封装
     NSInteger colorIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"ColorIndex"];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:[NSString stringWithFormat:@"reader_bg%ld.png",colorIndex]]];
     UIBarButtonItem *backButtonItem=[[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(navigationPopView)];
@@ -170,6 +172,7 @@
 - (void)changedFont:(NSInteger)font {
     self.textFont = font;
     self.datasource.textFont = font;
+#warning 需要抽取代码 ————  字体背景色的存取需要封装 ————  字体背景色的存取需要封装
     [[NSUserDefaults standardUserDefaults] setInteger:font forKey:@"TextFont"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     NSInteger page = [self.datasource fontChangedPageWithCurrentPage:[_pageViewController.viewControllers.lastObject index]];
@@ -179,6 +182,7 @@
     UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"reader_bg%ld.png",colorIndex]];
     self.view.backgroundColor = [UIColor colorWithPatternImage:image];
     _pageViewController.viewControllers.lastObject.view.backgroundColor = self.view.backgroundColor;
+#warning 需要抽取代码 ————  字体背景色的存取需要封装
     [[NSUserDefaults standardUserDefaults] setInteger:colorIndex forKey:@"ColorIndex"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -289,6 +293,7 @@
         _settingView = [[ZEReadSettingView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 100)];
         _settingView.delegate = self;
         _settingView.textFont = self.textFont;
+#warning 需要抽取代码 ————  字体背景色的存取需要封装
         _settingView.colorIndex = [[NSUserDefaults standardUserDefaults] integerForKey:@"ColorIndex"];
         [self.view addSubview:_settingView];
     }
