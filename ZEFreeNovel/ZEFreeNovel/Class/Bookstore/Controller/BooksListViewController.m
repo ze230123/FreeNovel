@@ -45,8 +45,10 @@
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [HttpUtils post:BOOK_BOOKSLIST_URL parameters:@{@"typeId":self.type.Id} callBack:^(id data, NSError *error) {
         if (!error) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
             self.listModel = [BooksListModel mj_objectWithKeyValues:data];
             [self.collectionView reloadData];
         }

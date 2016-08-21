@@ -21,13 +21,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.view.backgroundColor = [UIColor whiteColor];
+//    self.view.backgroundColor = [UIColor whiteColor];
     
     _nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, SCREEN_WIDTH-20, 30)];
     _nameLabel.font = [UIFont systemFontOfSize:15];
     
     _textView = [[TextDisplayView alloc]initWithFrame:CGRectMake(10, 30, SCREEN_WIDTH-20, SCREEN_HEIGHT-50)];
-    _textView.backgroundColor = [UIColor lightGrayColor];
+    _textView.backgroundColor = [UIColor clearColor];
     _textView.string = self.content;
     _textView.font = _font;
     [self.view addSubview:_nameLabel];

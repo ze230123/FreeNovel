@@ -23,6 +23,5 @@
  */
 - (instancetype)initWithBooksInfo:(Book *)model;
 
-- (void)showhide;
 
 @end

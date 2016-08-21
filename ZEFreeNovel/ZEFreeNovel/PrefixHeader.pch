@@ -25,7 +25,7 @@
 
 #import <MJExtension.h>
 #import <Masonry.h>
-
+#import <MBProgressHUD.h>
 
 #import <CoreText/CoreText.h>
 #endif /* PrefixHeader_pch */

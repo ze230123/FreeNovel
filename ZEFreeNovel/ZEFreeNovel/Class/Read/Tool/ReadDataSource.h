@@ -35,6 +35,8 @@
 - (void)nextChapter;
 
 - (void)cacheContentTextWithNumbers:(NSInteger)number;
+/** 根据当前页数计算并返回改变字号后的页数 */
+- (NSInteger)fontChangedPageWithCurrentPage:(NSInteger)page;
 
 - (NSString*)stringWithPage:(NSInteger)page;
 
