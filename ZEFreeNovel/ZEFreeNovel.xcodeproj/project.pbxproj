@@ -32,6 +32,7 @@
 		992422741D49091000C14F40 /* ChapterContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 992422731D49091000C14F40 /* ChapterContent.m */; };
 		992422761D49BD8200C14F40 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 992422751D49BD8200C14F40 /* CoreText.framework */; };
 		9924227A1D4B2FA300C14F40 /* PageRangeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 992422791D4B2FA300C14F40 /* PageRangeModel.m */; };
+		995B4A5D1D6C841C00234873 /* ZEAlertHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 995B4A5C1D6C841C00234873 /* ZEAlertHUD.m */; };
 		997FC7761D46349600B725B9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7751D46349600B725B9 /* main.m */; };
 		997FC7791D46349600B725B9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7781D46349600B725B9 /* AppDelegate.m */; };
 		997FC77F1D46349600B725B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 997FC77D1D46349600B725B9 /* Main.storyboard */; };
@@ -125,6 +126,8 @@
 		992422751D49BD8200C14F40 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		992422781D4B2FA300C14F40 /* PageRangeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageRangeModel.h; sourceTree = "<group>"; };
 		992422791D4B2FA300C14F40 /* PageRangeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageRangeModel.m; sourceTree = "<group>"; };
+		995B4A5B1D6C841C00234873 /* ZEAlertHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZEAlertHUD.h; sourceTree = "<group>"; };
+		995B4A5C1D6C841C00234873 /* ZEAlertHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZEAlertHUD.m; sourceTree = "<group>"; };
 		997FC7711D46349600B725B9 /* ZEFreeNovel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZEFreeNovel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		997FC7751D46349600B725B9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		997FC7771D46349600B725B9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -410,6 +413,8 @@
 		997FC7A91D46361C00B725B9 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				995B4A5B1D6C841C00234873 /* ZEAlertHUD.h */,
+				995B4A5C1D6C841C00234873 /* ZEAlertHUD.m */,
 			);
 			path = Vender;
 			sourceTree = "<group>";
@@ -683,6 +688,7 @@
 				9924224C1D48920100C14F40 /* TypeModel.m in Sources */,
 				991E2DD51D5835AC00CB997C /* PagingUtils.m in Sources */,
 				992422601D48B92B00C14F40 /* BooksModel.m in Sources */,
+				995B4A5D1D6C841C00234873 /* ZEAlertHUD.m in Sources */,
 				997FC7B41D46384200B725B9 /* BookstackViewController.m in Sources */,
 				992422741D49091000C14F40 /* ChapterContent.m in Sources */,
 				992422561D48A2CD00C14F40 /* TypeListCell.m in Sources */,

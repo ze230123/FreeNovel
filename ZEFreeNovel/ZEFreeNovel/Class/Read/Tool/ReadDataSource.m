@@ -46,24 +46,26 @@
     [paging paging];
 }
 #pragma mark 公共方法
-- (void)preChapter {
+- (BOOL)preChapter {
     if (self.currentChapterIndex <= 0) {
         NSLog(@"已经是第一章了！！！！");
-        return;
+        return NO;
     } else {
         self.currentChapterIndex--;
         [self loadFinishWithIndex:self.currentChapterIndex-1 group:nil];
         [self configPaging];
+        return YES;
     }
 }
-- (void)nextChapter {
+- (BOOL)nextChapter {
     if (self.currentChapterIndex >= self.totalChapter) {
         NSLog(@"已经是最后一章了!!!!!");
-        return;
+        return NO;
     } else {
         self.currentChapterIndex++;
         [self needCache];
         [self configPaging];
+        return YES;
     }
 }
 - (void)openChapter {

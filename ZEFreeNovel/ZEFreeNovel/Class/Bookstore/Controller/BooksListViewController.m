@@ -47,8 +47,8 @@
     }];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [HttpUtils post:BOOK_BOOKSLIST_URL parameters:@{@"typeId":self.type.Id} callBack:^(id data, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (!error) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
             self.listModel = [BooksListModel mj_objectWithKeyValues:data];
             [self.collectionView reloadData];
         }

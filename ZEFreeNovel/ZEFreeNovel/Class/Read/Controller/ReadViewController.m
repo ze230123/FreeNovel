@@ -63,7 +63,7 @@
     self.hidesBottomBarWhenPushed = YES;
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(callToolBar)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(callToolBar:)];
     [self.view addGestureRecognizer:tap];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willTerminate:) name:UIApplicationWillTerminateNotification object:nil];
@@ -87,36 +87,31 @@
 - (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController {
     NSInteger index = ((ContentViewController *)viewController).index;
     // 当前章节和当前页数都为0 代表当前为图书第一张的第一页
-    if (self.datasource.currentChapterIndex == 0 && index == 0) {
-        return nil;
-    }
     _isRight = NO;
     _isTurning = NO;
     index--;
     if (index < 0) {
         _isTurning = YES;
-        [self.datasource preChapter];
+        if (![self.datasource preChapter]) {
+            [ZEAlertHUD showMessage:@"已经是第一章了！！！" inView:self.view];
+            return nil;
+        };
         index = self.datasource.lastPage;
     }
     return [self viewControllerAtIndex:index];
 }
-- (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewControllers  {
-    
-    
-}
-
 - (nullable UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController {
     NSInteger index = ((ContentViewController *)viewController).index;
     NSLog(@"当前%ld页",index);
-    if (self.datasource.currentChapterIndex == self.datasource.chapters.count - 1 && index == self.datasource.lastPage) {
-        return nil;
-    }
     _isRight = YES;
     _isTurning = NO;
     index++;
     if (index > self.datasource.lastPage) {
         _isTurning = YES;
-        [self.datasource nextChapter];
+        if (![self.datasource nextChapter]) {
+            [ZEAlertHUD showMessage:@"已经是最后一章了！！！" inView:self.view];
+            return nil;
+        }
         index = 0;
     }
     return [self viewControllerAtIndex:index];
@@ -246,7 +241,11 @@
     
 }
 
-- (void)callToolBar {
+- (void)callToolBar:(UITapGestureRecognizer *)tap {
+    CGPoint point = [tap locationInView:self.view];
+    if (point.x < 80 || point.x > SCREEN_WIDTH - 80) {
+        return;
+    }
     _isHidden = !_isHidden;
     if (_isHidden) {
         NSLog(@"显示TOOLBAR");

@@ -12,7 +12,7 @@
 /**
  *  阅读模块
  */
-@interface ReadViewController : BaseViewController
+@interface ReadViewController : UIViewController
 
 /**
  *  初始化
