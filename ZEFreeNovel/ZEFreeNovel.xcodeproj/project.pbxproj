@@ -32,6 +32,7 @@
 		992422741D49091000C14F40 /* ChapterContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 992422731D49091000C14F40 /* ChapterContent.m */; };
 		992422761D49BD8200C14F40 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 992422751D49BD8200C14F40 /* CoreText.framework */; };
 		9924227A1D4B2FA300C14F40 /* PageRangeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 992422791D4B2FA300C14F40 /* PageRangeModel.m */; };
+		995B4A5D1D6C841C00234873 /* ZEAlertHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 995B4A5C1D6C841C00234873 /* ZEAlertHUD.m */; };
 		997FC7761D46349600B725B9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7751D46349600B725B9 /* main.m */; };
 		997FC7791D46349600B725B9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7781D46349600B725B9 /* AppDelegate.m */; };
 		997FC77F1D46349600B725B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 997FC77D1D46349600B725B9 /* Main.storyboard */; };
@@ -41,10 +42,11 @@
 		997FC79A1D46349600B725B9 /* ZEFreeNovelUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7991D46349600B725B9 /* ZEFreeNovelUITests.m */; };
 		997FC7B11D46383300B725B9 /* BookstoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7B01D46383300B725B9 /* BookstoreViewController.m */; };
 		997FC7B41D46384200B725B9 /* BookstackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 997FC7B31D46384200B725B9 /* BookstackViewController.m */; };
-		99908C7D1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C7C1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m */; };
 		99908C811D4DC8E100B55879 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C801D4DC8E100B55879 /* BaseViewController.m */; };
 		99908C8B1D4E1D2000B55879 /* AFAppDotNetAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 99908C8A1D4E1D2000B55879 /* AFAppDotNetAPIClient.m */; };
 		9997E0771D58A75300CB53FA /* BooksListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 992422581D48A88F00C14F40 /* BooksListViewController.m */; };
+		9997E07A1D5CA86D00CB53FA /* ZEToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997E0791D5CA86D00CB53FA /* ZEToolBar.m */; };
+		9997E07D1D5CBB4B00CB53FA /* ZEReadSettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9997E07C1D5CBB4B00CB53FA /* ZEReadSettingView.m */; };
 		99FB9F671D463A3200C9C8AD /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB9F661D463A3200C9C8AD /* TabBarController.m */; };
 		99FB9F6A1D463EB800C9C8AD /* HttpUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB9F691D463EB800C9C8AD /* HttpUtils.m */; };
 		99FB9F711D4640DB00C9C8AD /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 99FB9F701D4640DB00C9C8AD /* NSString+Extension.m */; };
@@ -124,6 +126,8 @@
 		992422751D49BD8200C14F40 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		992422781D4B2FA300C14F40 /* PageRangeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageRangeModel.h; sourceTree = "<group>"; };
 		992422791D4B2FA300C14F40 /* PageRangeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageRangeModel.m; sourceTree = "<group>"; };
+		995B4A5B1D6C841C00234873 /* ZEAlertHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZEAlertHUD.h; sourceTree = "<group>"; };
+		995B4A5C1D6C841C00234873 /* ZEAlertHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZEAlertHUD.m; sourceTree = "<group>"; };
 		997FC7711D46349600B725B9 /* ZEFreeNovel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZEFreeNovel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		997FC7751D46349600B725B9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		997FC7771D46349600B725B9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -143,12 +147,14 @@
 		997FC7B21D46384200B725B9 /* BookstackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookstackViewController.h; sourceTree = "<group>"; };
 		997FC7B31D46384200B725B9 /* BookstackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookstackViewController.m; sourceTree = "<group>"; };
 		99908C761D4B72AF00B55879 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		99908C7B1D4CE0AE00B55879 /* UIPageViewController+UIGestureRecognizers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPageViewController+UIGestureRecognizers.h"; sourceTree = "<group>"; };
-		99908C7C1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPageViewController+UIGestureRecognizers.m"; sourceTree = "<group>"; };
 		99908C7F1D4DC8E100B55879 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		99908C801D4DC8E100B55879 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		99908C891D4E1D2000B55879 /* AFAppDotNetAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAppDotNetAPIClient.h; sourceTree = "<group>"; };
 		99908C8A1D4E1D2000B55879 /* AFAppDotNetAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAppDotNetAPIClient.m; sourceTree = "<group>"; };
+		9997E0781D5CA86D00CB53FA /* ZEToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZEToolBar.h; sourceTree = "<group>"; };
+		9997E0791D5CA86D00CB53FA /* ZEToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZEToolBar.m; sourceTree = "<group>"; };
+		9997E07B1D5CBB4B00CB53FA /* ZEReadSettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZEReadSettingView.h; sourceTree = "<group>"; };
+		9997E07C1D5CBB4B00CB53FA /* ZEReadSettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZEReadSettingView.m; sourceTree = "<group>"; };
 		99FB9F651D463A3200C9C8AD /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		99FB9F661D463A3200C9C8AD /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		99FB9F681D463EB800C9C8AD /* HttpUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpUtils.h; sourceTree = "<group>"; };
@@ -243,6 +249,10 @@
 			children = (
 				991E2DCA1D574F9400CB997C /* TextDisplayView.h */,
 				991E2DCB1D574F9400CB997C /* TextDisplayView.m */,
+				9997E0781D5CA86D00CB53FA /* ZEToolBar.h */,
+				9997E0791D5CA86D00CB53FA /* ZEToolBar.m */,
+				9997E07B1D5CBB4B00CB53FA /* ZEReadSettingView.h */,
+				9997E07C1D5CBB4B00CB53FA /* ZEReadSettingView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -396,8 +406,6 @@
 			children = (
 				99FB9F6F1D4640DB00C9C8AD /* NSString+Extension.h */,
 				99FB9F701D4640DB00C9C8AD /* NSString+Extension.m */,
-				99908C7B1D4CE0AE00B55879 /* UIPageViewController+UIGestureRecognizers.h */,
-				99908C7C1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -405,6 +413,8 @@
 		997FC7A91D46361C00B725B9 /* Vender */ = {
 			isa = PBXGroup;
 			children = (
+				995B4A5B1D6C841C00234873 /* ZEAlertHUD.h */,
+				995B4A5C1D6C841C00234873 /* ZEAlertHUD.m */,
 			);
 			path = Vender;
 			sourceTree = "<group>";
@@ -678,9 +688,11 @@
 				9924224C1D48920100C14F40 /* TypeModel.m in Sources */,
 				991E2DD51D5835AC00CB997C /* PagingUtils.m in Sources */,
 				992422601D48B92B00C14F40 /* BooksModel.m in Sources */,
+				995B4A5D1D6C841C00234873 /* ZEAlertHUD.m in Sources */,
 				997FC7B41D46384200B725B9 /* BookstackViewController.m in Sources */,
 				992422741D49091000C14F40 /* ChapterContent.m in Sources */,
 				992422561D48A2CD00C14F40 /* TypeListCell.m in Sources */,
+				9997E07D1D5CBB4B00CB53FA /* ZEReadSettingView.m in Sources */,
 				991E2D6A1D5113FC00CB997C /* Book.m in Sources */,
 				991E2D0C1D50AE0D00CB997C /* ZEFreeNovel.xcdatamodeld in Sources */,
 				991E2D681D5113FC00CB997C /* Chapter.m in Sources */,
@@ -688,11 +700,11 @@
 				99FB9F671D463A3200C9C8AD /* TabBarController.m in Sources */,
 				991E2D671D5113FC00CB997C /* Chapter+CoreDataProperties.m in Sources */,
 				991E2DD21D58322400CB997C /* ReadDataSource.m in Sources */,
+				9997E07A1D5CA86D00CB53FA /* ZEToolBar.m in Sources */,
 				991E2D7B1D5322B800CB997C /* BookstackCell.m in Sources */,
 				9924227A1D4B2FA300C14F40 /* PageRangeModel.m in Sources */,
 				99FB9F6A1D463EB800C9C8AD /* HttpUtils.m in Sources */,
 				991E2DCC1D574F9400CB997C /* TextDisplayView.m in Sources */,
-				99908C7D1D4CE0AF00B55879 /* UIPageViewController+UIGestureRecognizers.m in Sources */,
 				9924226E1D48F84200C14F40 /* BookChapter.m in Sources */,
 				9924224F1D48971300C14F40 /* TypeList.m in Sources */,
 				992422681D48E4AF00C14F40 /* ReadViewController.m in Sources */,

@@ -25,7 +25,9 @@
 //    return self;
 //}
 
-
+- (void)dealloc {
+    NSLog(@"%@ 文本绘制视图被销毁",[[self class] description]);
+}
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
@@ -55,7 +57,6 @@
     
     // 步骤 5 绘制
     CTFrameDraw(frame, context);
-    
     // 步骤 6
     CFRelease(frame);
     CFRelease(path);

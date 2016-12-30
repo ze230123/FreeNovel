@@ -40,30 +40,32 @@
 #pragma mark 分页
 - (void)configPaging {
     paging = [[PagingUtils alloc]init];
-    paging.contentFont = 25;
+    paging.contentFont = self.textFont;
     paging.contentText = [_chapters[self.currentChapterIndex] txt];
     paging.textRenderSize = CGSizeMake(SCREEN_WIDTH-20, SCREEN_HEIGHT-50);
     [paging paging];
 }
 #pragma mark 公共方法
-- (void)preChapter {
+- (BOOL)preChapter {
     if (self.currentChapterIndex <= 0) {
         NSLog(@"已经是第一章了！！！！");
-        return;
+        return NO;
     } else {
         self.currentChapterIndex--;
         [self loadFinishWithIndex:self.currentChapterIndex-1 group:nil];
         [self configPaging];
+        return YES;
     }
 }
-- (void)nextChapter {
+- (BOOL)nextChapter {
     if (self.currentChapterIndex >= self.totalChapter) {
         NSLog(@"已经是最后一章了!!!!!");
-        return;
+        return NO;
     } else {
         self.currentChapterIndex++;
         [self needCache];
         [self configPaging];
+        return YES;
     }
 }
 - (void)openChapter {
@@ -73,7 +75,11 @@
 - (NSString*)name {
     return [_chapters[self.currentChapterIndex] name];
 }
-
+- (NSInteger)fontChangedPageWithCurrentPage:(NSInteger)page {
+    NSInteger location = [paging locationWithPage:page];
+    [self configPaging];
+    return [paging pageWithTextOffSet:location];
+}
 - (NSString *)stringWithPage:(NSInteger)page {
     return [paging stringOfPage:page];
 }
@@ -145,10 +151,10 @@
     }
     [self loadFinishWithIndex:self.currentChapterIndex-1 group:group];
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        if (self.isReloadUI) {
+//        if (self.isReloadUI) {
             [self callFinish];
-            self.isReloadUI = NO;
-        }
+//            self.isReloadUI = NO;
+//        }
     });
 }
 /** 通知UI更新界面 */

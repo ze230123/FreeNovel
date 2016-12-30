@@ -30,11 +30,14 @@
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [HttpUtils post:BOOK_TYPELIST_URL parameters:nil callBack:^(id data, NSError *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         if (!error) {
             NSLog(@"类型列表完成");
             self.typeList = [TypeList mj_objectWithKeyValues:data];
             [self.collectionView reloadData];
+        } else {
         }
     }];
 

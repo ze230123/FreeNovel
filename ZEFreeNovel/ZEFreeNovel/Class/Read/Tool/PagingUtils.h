@@ -10,9 +10,9 @@
 
 @interface PagingUtils : NSObject
 
-@property (nonatomic, copy)               NSString   *contentText;
-@property (nonatomic, unsafe_unretained)  NSUInteger  contentFont;
-@property (nonatomic, unsafe_unretained)  CGSize     textRenderSize;
+@property (nonatomic, copy  ) NSString   *contentText;
+@property (nonatomic, assign) NSUInteger contentFont;
+@property (nonatomic, assign) CGSize     textRenderSize;
 
 - (void)paging;
 /**
@@ -29,5 +29,9 @@
  *  @return 内容
  */
 - (NSString *)stringOfPage:(NSUInteger)page;
+
+- (NSInteger)locationWithPage:(NSInteger)page;
+
+- (NSInteger)pageWithTextOffSet:(NSInteger)OffSet;
 
 @end
