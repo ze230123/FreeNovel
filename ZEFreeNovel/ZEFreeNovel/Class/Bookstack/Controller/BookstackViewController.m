@@ -10,6 +10,8 @@
 #import "ReadViewController.h"
 #import "BookstackCell.h"
 #import "PersistentStack.h"
+#import "AFAppDotNetAPIClient.h"
+
 @interface BookstackViewController () <UICollectionViewDataSource,UICollectionViewDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
